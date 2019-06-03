@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
+import { Logo } from "./logo";
 
 export class Registration extends React.Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export class Registration extends React.Component {
                     // console.log("user id exists :", data.userId);
                 } else if (data.error) {
                     this.setState({
-                        error: "Oopsie, something went wrong. Please try again!"
+                        error: "Catastrophic Failure!"
                     });
                 }
             });
@@ -37,9 +38,10 @@ export class Registration extends React.Component {
     render() {
         return (
             <div className="register-input">
-                <h1>Find fellow dog walkers</h1>
+                <Logo />
+                <h1>Tomodachi</h1>
                 <p> {this.state.error} </p>
-
+                <h5>Register</h5>
                 <input
                     name="first"
                     placeholder="first"
@@ -62,7 +64,11 @@ export class Registration extends React.Component {
                     onChange={e => this.handleChange(e)}
                 />
                 <button onClick={e => this.submit(e)}>submit</button>
-                <Link to="/login">Already a member? Login</Link>
+
+                <p>
+                    Already a member? &nbsp;| &nbsp;
+                    <Link to="/login">Login</Link>
+                </p>
             </div>
         );
     }

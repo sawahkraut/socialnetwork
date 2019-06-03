@@ -6,8 +6,6 @@ import { Login } from "./login";
 export function Welcome() {
     return (
         <div id="welcome">
-            <h1>Welcome!</h1>
-            <img src="/img/logo.jpeg" />
             <HashRouter>
                 <React.Fragment>
                     <Route exact path="/" component={Registration} />

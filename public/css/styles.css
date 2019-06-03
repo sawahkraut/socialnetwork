@@ -1,28 +1,89 @@
-main {
-    background-color: #fafafa;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-}
-/* .welcome-container {
-    width: 80rem;
-} */
+@import url("https://fonts.googleapis.com/css?family=Inconsolata|Montserrat&display=swap");
+
 .register-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 3rem;
-    padding: 3rem;
-    color: #ff7e67;
-    font-family: "Corbel" sans-serif;
+    background-color: #ffb7c5;
+    color: #142d4c;
+    font-family: "Montserrat";
+    height: 85vh;
+    width: 30rem;
+}
+#welcome {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    z-index: 1;
 }
 input {
-    font-family: "Corbel" sans-serif;
+    font-family: "Montserrat";
     padding: 0.3rem;
     margin: 0.3rem;
 }
+p {
+    text-decoration: none;
+    color: black;
+    padding: 4px;
+}
 h1 {
-    font-family: "Corbel" sans-serif;
-    font-size: 34px;
+    font-family: "Inconsolata";
+    font-size: 50px;
+    padding: 0px;
+    margin: 0 auto;
+}
+img {
+    padding-bottom: 3px;
+}
+h5 {
+    font-family: "Montserrat";
+    color: #142d4c;
+    font-size: 20px;
+}
+
+/* ############ background ################ */
+
+body {
+    background-color: #333;
+}
+
+.snow-bg {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: url("http://www.mcctours.com.my/wp-content/uploads/2018/01/sakura-1-1.png"),
+        url("http://www.mcctours.com.my/wp-content/uploads/2018/01/sakura-2.png");
+    animation: snow 10s linear infinite;
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .woocommerce ul.products li.product,
+    .woocommerce-page ul.products li.product,
+    .woocommerce-page[class*="columns-"] ul.products li.product,
+    .woocommerce[class*="columns-"] ul.products li.product {
+        width: 100%;
+        float: left;
+        clear: both;
+        margin: 0 7em;
+    }
 }

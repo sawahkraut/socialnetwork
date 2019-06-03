@@ -17,3 +17,12 @@ module.exports.addUser = function addUser(first, last, email, password) {
         [first, last, email, password]
     );
 };
+
+module.exports.getUser = function(email) {
+    return db.query(
+        `SELECT first, last, email, password, id
+        FROM users
+        WHERE email=$1;`,
+        [email]
+    );
+};

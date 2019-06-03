@@ -55,14 +55,6 @@ if (process.env.NODE_ENV != "production") {
 
 // ################################# GET AND POST ################################# //
 
-app.get("*", function(req, res) {
-    if (!req.session.userId && req.url != "/welcome") {
-        res.redirect("/welcome");
-    } else {
-        res.sendFile(__dirname + "/index.html");
-    }
-});
-
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
         res.redirect("/");
@@ -72,7 +64,7 @@ app.get("/welcome", function(req, res) {
 });
 
 app.post("/register", function(req, res) {
-    console.log(req.body);
+    console.log("REQ.BODY!!!!!: ", req.body);
     bc.hashPassword(req.body.password)
         .then(hashedPw => {
             db.addUser(req.body.first, req.body.last, req.body.email, hashedPw)
@@ -82,13 +74,49 @@ app.post("/register", function(req, res) {
                 })
                 .catch(err => {
                     console.log("error in POST registration", err);
-                    res.json({ error: "" });
+                    res.json({ error: "invalid credentials" });
                 });
         })
         .catch(err => {
             console.log("error in bc.hashPassword POST registration", err);
+            res.json({ error: "invalid credentials" });
         });
 });
+
+app.post("/login", function(req, res) {
+    db.getUser(req.body.email).then(userLogin => {
+        const hashedPw = userLogin.rows[0].password;
+        bc.checkPassword(req.body.password, hashedPw)
+            .then(results => {
+                console.log(results, userLogin.rows[0]);
+                if (results) {
+                    req.session.userId = userLogin.rows[0].id;
+                    res.json({ success: true });
+                } else {
+                    throw new Error();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.json({
+                    error: "You have entered an invalid email or password"
+                });
+            });
+    });
+});
+
+app.get("*", function(req, res) {
+    if (!req.session.userId && req.url != "/welcome") {
+        res.redirect("/welcome");
+    } else if (req.session.userId && req.url == "/welcome") {
+        res.redirect("/");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
+// ################################# background color ################################# //
+
+// ####################################################################################
 app.listen(8080, function() {
     console.log("I'm listening");
 });
