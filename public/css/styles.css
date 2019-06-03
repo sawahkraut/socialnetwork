@@ -1,0 +1,26 @@
+main {
+    background-color: #fef8e6;
+    margin: 0 auto;
+}
+/* .welcome-container {
+    width: 80rem;
+} */
+.register-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+    padding: 3rem;
+    color: #3e4149;
+    font-family: "Corbel" sans-serif;
+}
+input {
+    font-family: "Corbel" sans-serif;
+    padding: 0.3rem;
+    margin: 0.3rem;
+}
+h1 {
+    font-family: "Corbel" sans-serif;
+    font-size: 34px;
+}

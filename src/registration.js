@@ -22,8 +22,9 @@ export class Registration extends React.Component {
                 password: this.state.password
             })
             .then(({ data }) => {
-                if (data.userId) {
-                    console.log("user id exists :", data.userId);
+                if (data.success) {
+                    location.replace("/");
+                    // console.log("user id exists :", data.userId);
                 } else if (data.error) {
                     this.setState({
                         error: "Oopsie, something went wrong. Please try again!"
@@ -34,10 +35,10 @@ export class Registration extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Insert socialnetwork name here</h1>
-                <img src="" />
+            <div className="register-input">
+                <h1>Find fellow dog walkers</h1>
                 <p> {this.state.error} </p>
+
                 <input
                     name="first"
                     placeholder="first"
@@ -56,9 +57,11 @@ export class Registration extends React.Component {
                 <input
                     name="password"
                     placeholder="password"
+                    type="password"
                     onChange={e => this.handleChange(e)}
                 />
                 <button onClick={e => this.submit(e)}>submit</button>
+
                 <p>
                     Already a member? <a href="#"> Login </a>
                 </p>

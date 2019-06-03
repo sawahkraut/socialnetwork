@@ -1,13 +1,13 @@
 const express = require("express");
+const db = require("./utils/db");
+const bc = require("./utils/bc");
 const compression = require("compression");
 const app = express();
-
 // const s3 = require("./s3");
-// const db = require("./utils/db");
-// const bc = require("./utils/bc");
 
 app.use(compression());
 app.use(express.static("public"));
+app.use(express.json());
 
 // ############################### body parser + cookies ############################# //
 
@@ -56,6 +56,14 @@ if (process.env.NODE_ENV != "production") {
 
 // ################################# GET AND POST ################################# //
 
+app.get("*", function(req, res) {
+    if (!req.session.userId && req.url != "/welcome") {
+        res.redirect("/welcome");
+    } else {
+        res.sendFile(__dirname + "/index.html");
+    }
+});
+
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
         res.redirect("/");
@@ -64,14 +72,24 @@ app.get("/welcome", function(req, res) {
     }
 });
 
-app.get("*", function(req, res) {
-    if (!req.session.userId) {
-        res.redirect("/welcome");
-    } else {
-        res.sendFile(__dirname + "/index.html");
-    }
+app.post("/register", function(req, res) {
+    console.log(req.body);
+    bc.hashPassword(req.body.password)
+        .then(hashedPw => {
+            db.addUser(req.body.first, req.body.last, req.body.email, hashedPw)
+                .then(results => {
+                    req.session.userId = results.rows[0].id;
+                    res.json({ success: true });
+                })
+                .catch(err => {
+                    console.log("error in POST registration", err);
+                    res.json({ error: true });
+                });
+        })
+        .catch(err => {
+            console.log("error in bc.hashPassword POST registration", err);
+        });
 });
-
 app.listen(8080, function() {
-    console.log("I'm listening.");
+    console.log("I'm listening");
 });
