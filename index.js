@@ -31,15 +31,14 @@ app.use(
 
 // ################################ + vulnerabilities ################################ //
 
-// const csurf = require("csurf");
-//
-// app.use(csurf());
-//
-// app.use((req, res, next) => {
-//     res.locals.csrfToken = req.csrfToken();
-//     res.setHeader("x-frame-options", "DENY");
-//     next();
-// });
+const csurf = require("csurf");
+
+app.use(csurf());
+
+app.use(function(req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 // ################################################################################## //
 
@@ -83,7 +82,7 @@ app.post("/register", function(req, res) {
                 })
                 .catch(err => {
                     console.log("error in POST registration", err);
-                    res.json({ error: true });
+                    res.json({ error: "" });
                 });
         })
         .catch(err => {

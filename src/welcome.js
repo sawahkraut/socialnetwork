@@ -1,17 +1,19 @@
 import React from "react";
+import { HashRouter, Route } from "react-router-dom";
 import { Registration } from "./registration";
+import { Login } from "./login";
 
 export function Welcome() {
     return (
-        <div className="welcome-page">
-            <div className="welcome">
-                <div className="logo">
-                    <img src="/img/logo.jpeg" width="600px" />
-                </div>
-                <div className="register-form">
-                    <Registration />
-                </div>
-            </div>
+        <div id="welcome">
+            <h1>Welcome!</h1>
+            <img src="/img/logo.jpeg" />
+            <HashRouter>
+                <React.Fragment>
+                    <Route exact path="/" component={Registration} />
+                    <Route path="/login" component={Login} />
+                </React.Fragment>
+            </HashRouter>
         </div>
     );
 }
