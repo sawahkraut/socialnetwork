@@ -74,7 +74,7 @@ app.post("/register", function(req, res) {
                 })
                 .catch(err => {
                     console.log("error in POST registration", err);
-                    res.json({ error: "invalid credentials" });
+                    res.json({ error: "Oh snap! You got an error!" });
                 });
         })
         .catch(err => {

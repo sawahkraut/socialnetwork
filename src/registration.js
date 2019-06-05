@@ -2,6 +2,8 @@ import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";
+import { Button } from "reactstrap";
+import { Input } from "reactstrap";
 
 export class Registration extends React.Component {
     constructor(props) {
@@ -42,29 +44,30 @@ export class Registration extends React.Component {
                 <h1>Tomodachi</h1>
                 <p> {this.state.error} </p>
                 <h5>Register</h5>
-                <input
+                <Input
                     name="first"
-                    placeholder="first"
+                    placeholder="first name"
                     onChange={e => this.handleChange(e)}
                 />
-                <input
+                <Input
                     name="last"
-                    placeholder="last"
+                    placeholder="surname"
                     onChange={e => this.handleChange(e)}
                 />
-                <input
+                <Input
                     name="email"
                     placeholder="email"
                     onChange={e => this.handleChange(e)}
                 />
-                <input
+                <Input
                     name="password"
                     placeholder="password"
                     type="password"
                     onChange={e => this.handleChange(e)}
                 />
-                <button onClick={e => this.submit(e)}>submit</button>
-
+                <Button outline color="secondary" onClick={e => this.submit(e)}>
+                    submit
+                </Button>
                 <p>
                     Already a member? &nbsp;| &nbsp;
                     <Link to="/login">Login</Link>

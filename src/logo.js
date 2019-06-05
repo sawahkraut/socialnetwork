@@ -12,7 +12,9 @@ export class Logo extends React.Component {
                 "/img/panda4.svg",
                 "/img/panda5.svg",
                 "/img/panda6.svg",
-                "/img/panda7.svg"
+                "/img/panda7.svg",
+                "/img/panda8.svg",
+                "/img/panda9.svg"
             ]
         };
         this.updateCount = this.updateCount.bind(this);
@@ -28,7 +30,7 @@ export class Logo extends React.Component {
                 newCount = 0;
             }
             this.setState({ count: newCount });
-        }, 2500);
+        }, 3000);
     }
 
     render() {

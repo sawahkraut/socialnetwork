@@ -5,11 +5,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ffb7c5;
+    background-color: #dddbdb;
+    opacity: 0.9;
     color: #142d4c;
     font-family: "Montserrat";
     height: 85vh;
     width: 30rem;
+    filter: drop-shadow(0 0 0.75rem black);
+    border-radius: 25px;
 }
 #welcome {
     display: flex;
@@ -22,6 +25,8 @@ input {
     font-family: "Montserrat";
     padding: 0.3rem;
     margin: 0.3rem;
+    width: 25rem;
+    height: 10rem;
 }
 p {
     text-decoration: none;
@@ -42,48 +47,6 @@ h5 {
     color: #142d4c;
     font-size: 20px;
 }
-
-/* ############ background ################ */
-
-body {
-    background-color: #333;
-}
-
-.snow-bg {
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    background-image: url("http://www.mcctours.com.my/wp-content/uploads/2018/01/sakura-1-1.png"),
-        url("http://www.mcctours.com.my/wp-content/uploads/2018/01/sakura-2.png");
-    animation: snow 10s linear infinite;
-}
-
-@keyframes snow {
-    0% {
-        background-position: 0px 0px, 0px 0px, 0px 0px;
-    }
-    50% {
-        background-position: 500px 500px, 100px 200px, -100px 150px;
-    }
-    100% {
-        background-position: 500px 1000px, 200px 400px, -100px 300px;
-    }
-}
-
-@media (max-width: 768px) {
-    .woocommerce ul.products li.product,
-    .woocommerce-page ul.products li.product,
-    .woocommerce-page[class*="columns-"] ul.products li.product,
-    .woocommerce[class*="columns-"] ul.products li.product {
-        width: 100%;
-        float: left;
-        clear: both;
-        margin: 0 7em;
-    }
+Logo {
+    opacity: 1;
 }
