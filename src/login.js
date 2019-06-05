@@ -34,35 +34,37 @@ export class Login extends React.Component {
 
     render() {
         return (
-            <div className="register-input">
+            <React.Fragment>
                 <Logo />
-                <h1>Tomodachi</h1>
-                <p> {this.state.error} </p>
-                <h5>Login</h5>
-                <Input
-                    name="email"
-                    placeholder="email"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Input
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Button
-                    outline
-                    color="secondary"
-                    disabled={!this.state.password}
-                    onClick={e => this.submit(e)}
-                >
-                    submit
-                </Button>
-                <p>
-                    Not a member yet? &nbsp;| &nbsp;
-                    <Link to="/">Register</Link>
-                </p>
-            </div>
+                <div className="register-input">
+                    <h1>Tomodachi</h1>
+                    <p> {this.state.error} </p>
+                    <h5>Login</h5>
+                    <Input
+                        name="email"
+                        placeholder="email"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Input
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Button
+                        outline
+                        color="info"
+                        disabled={!this.state.password}
+                        onClick={e => this.submit(e)}
+                    >
+                        submit
+                    </Button>
+                    <p>
+                        Not a member yet? &nbsp;| &nbsp;
+                        <Link to="/">Register</Link>
+                    </p>
+                </div>
+            </React.Fragment>
         );
     }
 }

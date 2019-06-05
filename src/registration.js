@@ -39,40 +39,42 @@ export class Registration extends React.Component {
 
     render() {
         return (
-            <div className="register-input">
+            <React.Fragment>
                 <Logo />
-                <h1>Tomodachi</h1>
-                <p> {this.state.error} </p>
-                <h5>Register</h5>
-                <Input
-                    name="first"
-                    placeholder="first name"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Input
-                    name="last"
-                    placeholder="surname"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Input
-                    name="email"
-                    placeholder="email"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Input
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                    onChange={e => this.handleChange(e)}
-                />
-                <Button outline color="secondary" onClick={e => this.submit(e)}>
-                    submit
-                </Button>
-                <p>
-                    Already a member? &nbsp;| &nbsp;
-                    <Link to="/login">Login</Link>
-                </p>
-            </div>
+                <div className="register-input">
+                    <h1>Tomodachi</h1>
+                    <p> {this.state.error} </p>
+                    <h5>Register</h5>
+                    <Input
+                        name="first"
+                        placeholder="first name"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Input
+                        name="last"
+                        placeholder="surname"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Input
+                        name="email"
+                        placeholder="email"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Input
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <Button outline color="info" onClick={e => this.submit(e)}>
+                        submit
+                    </Button>
+                    <p>
+                        Already a member? &nbsp;| &nbsp;
+                        <Link to="/login">Login</Link>
+                    </p>
+                </div>
+            </React.Fragment>
         );
     }
 } // closes registration class

@@ -7,7 +7,7 @@ CREATE TABLE users(
     email VARCHAR (255) NOT NULL UNIQUE,
     password VARCHAR (255) NOT NULL,
     bio VARCHAR (255),
-    profileimg VARCHAR,
+    avatar VARCHAR (350),
     created_at TIMESTAMP DEFAULT
     CURRENT_TIMESTAMP
 );

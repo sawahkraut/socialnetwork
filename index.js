@@ -3,7 +3,7 @@ const db = require("./utils/db");
 const bc = require("./utils/bc");
 const compression = require("compression");
 const app = express();
-// const s3 = require("./s3");
+const s3 = require("./s3");
 
 app.use(compression());
 app.use(express.static("public"));
@@ -54,6 +54,31 @@ if (process.env.NODE_ENV != "production") {
 }
 
 // ################################# GET AND POST ################################# //
+// ############################ upload img setup ############################ //
+
+var multer = require("multer");
+var uidSafe = require("uid-safe");
+var path = require("path");
+
+var diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
+// ############################################################################# //
 
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
@@ -64,7 +89,6 @@ app.get("/welcome", function(req, res) {
 });
 
 app.post("/register", function(req, res) {
-    console.log("REQ.BODY!!!!!: ", req.body);
     bc.hashPassword(req.body.password)
         .then(hashedPw => {
             db.addUser(req.body.first, req.body.last, req.body.email, hashedPw)
@@ -73,13 +97,12 @@ app.post("/register", function(req, res) {
                     res.json({ success: true });
                 })
                 .catch(err => {
-                    console.log("error in POST registration", err);
-                    res.json({ error: "Oh snap! You got an error!" });
+                    res.json({ error: "Oh snap! You got an error!", err });
                 });
         })
         .catch(err => {
-            console.log("error in bc.hashPassword POST registration", err);
-            res.json({ error: "invalid credentials" });
+            // console.log("error in bc.hashPassword POST registration", err);
+            res.json({ error: "invalid credentials", err });
         });
 });
 
@@ -103,6 +126,35 @@ app.post("/login", function(req, res) {
                 });
             });
     });
+});
+
+app.get("/user", function(req, res) {
+    db.userInfo(req.session.userId)
+        .then(results => {
+            // console.log("feathers typing", results);
+            const avatar = results.rows[0].avatar || "/img/panda3.svg";
+            res.json({
+                id: req.session.userId,
+                first: results.rows[0].first,
+                last: results.rows[0].last,
+                bio: results.rows[0].bio,
+                avatar: avatar
+            });
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
+    const link =
+        `https://s3.amazonaws.com/salt-sawahkraut/` + req.file.filename;
+    db.pushImg(req.session.userId, link)
+        .then(() => res.json(link))
+        .catch(err => {
+            console.log(err);
+            res.json({ error: "Upload failed. Please try again" });
+        });
 });
 
 app.get("*", function(req, res) {

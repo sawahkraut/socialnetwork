@@ -35,7 +35,11 @@ export class Logo extends React.Component {
 
     render() {
         console.log(this.state.count);
-        return <img src={this.state.images[this.state.count]} />;
+        return (
+            <div className="logo">
+                <img src={this.state.images[this.state.count]} />
+            </div>
+        );
     }
 }
 

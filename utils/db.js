@@ -26,3 +26,18 @@ module.exports.getUser = function(email) {
         [email]
     );
 };
+
+module.exports.userInfo = function(id) {
+    return db.query(
+        `SELECT * FROM users
+        WHERE id=$1;`,
+        [id]
+    );
+};
+
+module.exports.pushImg = function pushImg(id, avatar) {
+    return db.query(`UPDATE users SET avatar = $2 WHERE id = $1;`, [
+        id,
+        avatar
+    ]);
+};
