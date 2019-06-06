@@ -2,7 +2,7 @@ import React from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
 import { Uploader } from "./uploader";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Profile } from "./profile";
 
 export class App extends React.Component {
     constructor(props) {
@@ -11,12 +11,20 @@ export class App extends React.Component {
             uploaderVisible: false
         };
         this.updatePic = this.updatePic.bind(this);
+        this.clickHandler = this.clickHandler.bind(this);
     }
     updatePic(url) {
         this.setState({
             avatar: url,
             uploaderVisible: false
         });
+    }
+    clickHandler() {
+        this.setState(
+            this.state.uploaderVisible
+                ? { uploaderVisible: false }
+                : { uploaderVisible: true }
+        );
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
@@ -34,19 +42,25 @@ export class App extends React.Component {
                         <img className="image" src="/img/panda3.svg" />
 
                         <React.Fragment />
+
                         <ProfilePic
                             imgUrl={this.state.avatar}
                             first={this.state.first}
-                            clickHandler={() =>
-                                this.setState({ uploaderVisible: true })
-                            }
+                            clickHandler={this.clickHandler}
                         />
-                        <div className="modal">
-                            {this.state.uploaderVisible && (
-                                <Uploader updatePic={this.updatePic} />
-                            )}
-                        </div>
+
+                        {this.state.uploaderVisible && (
+                            <Uploader
+                                updatePic={this.updatePic}
+                                clickHandler={this.clickHandler}
+                            />
+                        )}
                     </header>
+                    <h5 className="customHr" />
+                    <Profile
+                        imgUrl={this.state.avatar}
+                        first={this.state.first}
+                    />
                 </div>
             );
         }

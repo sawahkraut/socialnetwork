@@ -26,18 +26,20 @@ export class Uploader extends React.Component {
     }
     render() {
         return (
-            <form onSubmit={e => this.submit(e)}>
-                <input
-                    type="file"
-                    name="file"
-                    onChange={e => this.handleChange(e)}
-                />
-                <button disable={!this.state.profilePicture} type="submit">
-                    upload
-                </button>
-                {this.state.error && <p>{this.state.error}</p>}
-                <label>upload profile photo</label>
-            </form>
+            <div className="modal">
+                <form onSubmit={e => this.submit(e)}>
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={e => this.handleChange(e)}
+                    />
+                    <button disable={!this.state.profilePicture} type="submit">
+                        upload
+                    </button>
+                    {this.state.error && <p>{this.state.error}</p>}
+                    <label>upload profile photo</label>
+                </form>
+            </div>
         );
     }
 }
