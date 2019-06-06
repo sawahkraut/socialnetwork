@@ -66,7 +66,11 @@ export class Registration extends React.Component {
                         type="password"
                         onChange={e => this.handleChange(e)}
                     />
-                    <Button outline color="info" onClick={e => this.submit(e)}>
+                    <Button
+                        outline
+                        color="secondary"
+                        onClick={e => this.submit(e)}
+                    >
                         submit
                     </Button>
                     <p>

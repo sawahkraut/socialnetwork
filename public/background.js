@@ -1,4 +1,3 @@
-console.log("background working", createjs);
 (function() {
     var leavesStage, branchStage;
     var branchColor = "#3A2311";

@@ -1,18 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata|Montserrat&display=swap");
 
+.app {
+    background-color: #f88757;
+    height: 100vh;
+    background-image: url("/img/land.jpeg");
+    opacity: 0.9;
+    overflow-x: hidden;
+}
+
 .register-input {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    background-color: #b3afaf;
-    opacity: 0.9;
-    color: #008080;
+    background-color: #f88757;
+    /* opacity: 0.9; */
+    color: black;
     font-family: "Montserrat";
     height: 85vh;
     width: 30rem;
     filter: drop-shadow(0 0 0.75rem black);
-    border-radius: 25px;
+    border-radius: 20px;
 }
 #welcome {
     display: flex;
@@ -35,21 +43,50 @@ p {
 }
 h1 {
     font-family: "Inconsolata";
-    font-size: 50px;
-    padding: 0px;
+    font-size: 65px;
+    font-weight: bold;
+    padding-top: 10px;
     margin: 0 auto;
 }
 img {
     padding-bottom: 3px;
+    -webkit-user-drag: none;
 }
 h5 {
     font-family: "Montserrat";
-    color: #142d4c;
+    color: black;
     font-size: 20px;
 }
 .logo {
     position: absolute;
-    top: 10vh;
-    opacity: 1;
+    top: 7vh;
     z-index: 3;
+}
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-direction: row;
+    object-fit: contain;
+    height: 20vh;
+    overflow: hidden;
+    background-color: #f88757;
+    /* opacity: 0.9; */
+    filter: drop-shadow(0 0 0.75rem black);
+}
+.profilepic {
+    justify-content: flex-start;
+    height: 20vh;
+    width: 19vw;
+    left: 50vh;
+    z-index: 8;
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.6rem black);
+    padding-right: 2rem;
+    padding-top: 0.3rem;
+}
+.image {
+    justify-content: flex-end;
+    height: 8rem;
+    width: 8rem;
 }

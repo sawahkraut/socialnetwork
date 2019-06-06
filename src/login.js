@@ -53,7 +53,7 @@ export class Login extends React.Component {
                     />
                     <Button
                         outline
-                        color="info"
+                        color="secondary"
                         disabled={!this.state.password}
                         onClick={e => this.submit(e)}
                     >

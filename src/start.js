@@ -4,6 +4,7 @@ import { Welcome } from "./welcome";
 import { App } from "./app";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../public/css/normalize.css";
 import "../public/css/background.css";
 import "../public/css/styles.css";
 

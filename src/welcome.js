@@ -6,6 +6,8 @@ import { Login } from "./login";
 export function Welcome() {
     return (
         <div id="welcome">
+            <canvas id="treeCanvas" />
+            <canvas id="leavesCanvas" width="500" height="300" />
             <HashRouter>
                 <React.Fragment>
                     <Route exact path="/" component={Registration} />
