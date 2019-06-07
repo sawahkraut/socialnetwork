@@ -69,14 +69,14 @@ h5 {
     justify-content: space-evenly;
     width: 100%;
     flex-direction: row;
-    height: 20vh;
+    height: 13vh;
     overflow: hidden;
 }
 .profilepic {
     display: flex;
     justify-content: flex-end;
-    height: 20vh;
-    width: 19vw;
+    height: 12vh;
+    width: 10vw;
     left: 50vh;
     z-index: 8;
     object-fit: contain;
@@ -111,6 +111,7 @@ h5 {
     /* position: absolute; */
     align-self: center;
     margin-left: 4rem;
+    margin-top: 10px;
     justify-content: center;
     align-items: center;
     width: 90%;
@@ -118,5 +119,4 @@ h5 {
     color: rgba(0, 0, 0, 0);
     height: 1px;
     background-color: black;
-    margin-top: 0.5rem;
 }

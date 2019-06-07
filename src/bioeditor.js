@@ -15,17 +15,17 @@ export default class BioEditor extends React.Component {
 
     openBioEditor() {
         this.setState({
-            bioEditorIsVisible: true
+            bioEditorVisible: true
         });
     }
 
     submit() {
         axios
-            .post("/profile", { bio: this.state.bio })
+            .post("/editbio", { bio: this.state.bio })
             .then(results => {
                 console.log("results ", results);
                 this.setState({
-                    bioEditorIsVisible: false
+                    bioEditorVisible: false
                 });
                 this.props.setBio(this.state.bio);
             })
@@ -37,7 +37,7 @@ export default class BioEditor extends React.Component {
     render() {
         return (
             <div>
-                {this.props.bio && !this.state.bioEditorIsVisible && (
+                {this.props.bio && !this.state.bioEditorVisible && (
                     <div>
                         {this.props.bio}
                         <button onClick={() => this.openBioEditor()}>
@@ -45,7 +45,7 @@ export default class BioEditor extends React.Component {
                         </button>
                     </div>
                 )}
-                {!this.props.bio && !this.state.bioEditorIsVisible && (
+                {!this.props.bio && !this.state.bioEditorVisible && (
                     <div>
                         <button onClick={() => this.openBioEditor()}>
                             {" "}
@@ -53,7 +53,7 @@ export default class BioEditor extends React.Component {
                         </button>
                     </div>
                 )}
-                {this.state.bioEditorIsVisible && (
+                {this.state.bioEditorVisible && (
                     <div>
                         <p>write your bio:</p>
                         <textarea

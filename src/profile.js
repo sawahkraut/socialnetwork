@@ -4,7 +4,7 @@ import BioEditor from "./bioeditor";
 
 export class Profile extends React.Component {
     constructor(props) {
-        console.log("PROPS!! :", props);
+        // console.log("PROPS!! :", props);
         super(props);
         this.state = {};
     }
@@ -15,8 +15,9 @@ export class Profile extends React.Component {
                     imgUrl={this.props.imgUrl}
                     first={this.props.first}
                     last={this.props.last}
+                    clickHandler={this.props.clickHandler}
                 />
-                <BioEditor />
+                <BioEditor setBio={this.props.setBio} bio={this.props.bio} />
 
                 <div className="bio">
                     <h1>

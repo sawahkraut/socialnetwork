@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import ProfilePic from "./profilepic";
 
 export class Uploader extends React.Component {
     constructor(props) {
@@ -27,6 +28,11 @@ export class Uploader extends React.Component {
     render() {
         return (
             <div className="modal">
+                <ProfilePic
+                    imgUrl={this.props.imgUrl}
+                    first={this.props.first}
+                    last={this.props.last}
+                />
                 <form onSubmit={e => this.submit(e)}>
                     <input
                         type="file"

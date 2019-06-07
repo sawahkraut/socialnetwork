@@ -111,7 +111,7 @@ app.post("/login", function(req, res) {
         const hashedPw = userLogin.rows[0].password;
         bc.checkPassword(req.body.password, hashedPw)
             .then(results => {
-                console.log(results, userLogin.rows[0]);
+                // console.log(results, userLogin.rows[0]);
                 if (results) {
                     req.session.userId = userLogin.rows[0].id;
                     res.json({ success: true });
@@ -157,6 +157,26 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
         });
 });
 
+// ################################ edit bio ################################ //
+
+app.post("/editbio", function(req, res) {
+    if (req.body.bio) {
+        let bio = req.body.bio;
+        let id = req.session.userId;
+        db.updateBio(bio, id)
+            .then(results => {
+                res.json(results.rows[0].bio);
+            })
+            .catch(err => {
+                console.log("editbio post err", err);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+});
+
 app.get("*", function(req, res) {
     if (!req.session.userId && req.url != "/welcome") {
         res.redirect("/welcome");
@@ -166,7 +186,6 @@ app.get("*", function(req, res) {
         res.sendFile(__dirname + "/index.html");
     }
 });
-// ################################# background color ################################# //
 
 // ####################################################################################
 app.listen(8080, function() {

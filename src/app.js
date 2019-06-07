@@ -12,6 +12,12 @@ export class App extends React.Component {
         };
         this.updatePic = this.updatePic.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
+        this.setBio = this.setBio.bind(this);
+    }
+    setBio(bio) {
+        this.setState({
+            bio: bio
+        });
     }
     updatePic(url) {
         this.setState({
@@ -28,7 +34,7 @@ export class App extends React.Component {
     }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
-            console.log("DATA!", data);
+            // console.log("DATA!", data);
             this.setState(data);
         });
     }
@@ -46,11 +52,12 @@ export class App extends React.Component {
                         <ProfilePic
                             imgUrl={this.state.avatar}
                             first={this.state.first}
-                            clickHandler={this.clickHandler}
                         />
 
                         {this.state.uploaderVisible && (
                             <Uploader
+                                imgUrl={this.state.avatar}
+                                first={this.state.first}
                                 updatePic={this.updatePic}
                                 clickHandler={this.clickHandler}
                             />
@@ -58,8 +65,11 @@ export class App extends React.Component {
                     </header>
                     <h5 className="customHr" />
                     <Profile
+                        bio={this.state.bio}
                         imgUrl={this.state.avatar}
                         first={this.state.first}
+                        clickHandler={this.clickHandler}
+                        setBio={this.setBio}
                     />
                 </div>
             );

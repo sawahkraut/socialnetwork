@@ -41,3 +41,11 @@ module.exports.pushImg = function pushImg(id, avatar) {
         avatar
     ]);
 };
+
+module.exports.updateBio = function updateBio(bio, id) {
+    return db.query(
+        `UPDATE users SET bio=$1 WHERE id=$2
+        RETURNING bio`,
+        [bio, id]
+    );
+};
