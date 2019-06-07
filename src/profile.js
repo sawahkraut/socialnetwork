@@ -17,13 +17,15 @@ export class Profile extends React.Component {
                     last={this.props.last}
                     clickHandler={this.props.clickHandler}
                 />
-                <BioEditor setBio={this.props.setBio} bio={this.props.bio} />
-
-                <div className="bio">
-                    <h1>
-                        {" "}
-                        {this.props.first} {this.props.last}{" "}
-                    </h1>
+                <div className="info-container">
+                    <div className="biotitle">
+                        {this.props.first} {this.props.last}
+                    </div>
+                    <BioEditor
+                        setBio={this.props.setBio}
+                        bio={this.props.bio}
+                    />
+                    <div />
                 </div>
             </div>
         );

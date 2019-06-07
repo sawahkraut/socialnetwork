@@ -156,8 +156,24 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
             res.json({ error: "Upload failed. Please try again" });
         });
 });
+app.get("/otherprofile/:id", function(req, res) {
+    console.log("made it to other profile");
+    let id = req.params.id;
+    console.log("req.params.id:", req.params.id);
+    if (id == req.session.userId) {
+        res.json({ success: false });
+    } else {
+        db.userInfo(id)
+            .then(results => {
+                res.json(results.rows[0]);
+            })
+            .catch(err => {
+                console.log("other profile GET err", err);
+            });
+    }
+});
 
-// ################################ edit bio ################################ //
+// ################################# edit bio ################################# //
 
 app.post("/editbio", function(req, res) {
     if (req.body.bio) {

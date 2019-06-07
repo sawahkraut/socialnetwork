@@ -66,8 +66,9 @@ h5 {
 }
 .header {
     display: flex;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
     flex-direction: row;
     height: 13vh;
     overflow: hidden;
@@ -108,7 +109,6 @@ h5 {
 .customHr {
     display: flex;
     flex-direction: row;
-    /* position: absolute; */
     align-self: center;
     margin-left: 4rem;
     margin-top: 10px;
@@ -119,4 +119,31 @@ h5 {
     color: rgba(0, 0, 0, 0);
     height: 1px;
     background-color: black;
+}
+.info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-bio {
+    display: flex;
+    flex-direction: row;
+    margin-left: 4rem;
+    width: 40rem;
+    border: 1px solid black;
+}
+.profile-bio img {
+    width: 20rem;
+    height: 22rem;
+}
+.biotitle {
+    font-size: 40px;
+}
+.bio {
+    border: 1px solid red;
+}
+.bioinput {
+    border: 1px solid blue;
+    height: auto;
+    weight: auto;
 }
