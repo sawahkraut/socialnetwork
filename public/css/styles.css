@@ -73,6 +73,13 @@ h5 {
     height: 13vh;
     overflow: hidden;
 }
+.nav {
+    font-family: "Montserrat";
+    color: black;
+    font-size: 20px;
+    margin-top: 1.5rem;
+}
+
 .profilepic {
     display: flex;
     justify-content: flex-end;
@@ -82,7 +89,7 @@ h5 {
     z-index: 8;
     object-fit: contain;
     padding-right: 2rem;
-    padding-top: 0.3rem;
+    /* padding-top: 0.3rem; */
 }
 .image {
     height: 6rem;
@@ -93,18 +100,36 @@ h5 {
     position: fixed;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 700px;
     max-width: 100%;
-    height: 500px;
+    height: 550px;
     max-height: 100%;
     padding: 20px 50px 20px 20px;
     overflow: auto;
     z-index: 9;
-    background-color: #f5f5f5;
-    border-radius: 5px;
+    background-color: #d1d1d1;
+    filter: drop-shadow(0 0 0.75rem black);
+}
+.modal img {
+    height: 15rem;
+    width: auto;
+    margin-left: 5rem;
+}
+.modalinput {
+    padding: 0.3rem;
+    width: auto;
+    height: auto;
+}
+.modal form {
+    padding: 3rem;
+    margin-left: 6rem;
+    width: auto;
+    height: auto;
+    font-family: "Montserrat";
 }
 .customHr {
     display: flex;
@@ -123,6 +148,7 @@ h5 {
 .info-container {
     display: flex;
     flex-direction: column;
+    padding-top: 4rem;
 }
 
 .profile-bio {
@@ -130,20 +156,25 @@ h5 {
     flex-direction: row;
     margin-left: 4rem;
     width: 40rem;
-    border: 1px solid black;
 }
 .profile-bio img {
-    width: 20rem;
-    height: 22rem;
+    width: 18rem;
+    height: 20rem;
+    filter: drop-shadow(0 0 0.75rem black);
 }
 .biotitle {
     font-size: 40px;
 }
 .bio {
-    border: 1px solid red;
+    font-size: 20px;
+    color: #404040;
+}
+.bio button {
+    height: 2rem;
+    width: 6rem;
+    margin-top: 1rem;
 }
 .bioinput {
-    border: 1px solid blue;
     height: auto;
-    weight: auto;
+    weight: 10rem;
 }

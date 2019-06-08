@@ -50,7 +50,10 @@ export class App extends React.Component {
                         <img className="image" src="/img/panda3.svg" />
 
                         <React.Fragment />
-
+                        <h4 className="nav">Find Friends</h4>
+                        <a href="/" className="nav">
+                            Logout
+                        </a>
                         <ProfilePic
                             imgUrl={this.state.avatar}
                             first={this.state.first}

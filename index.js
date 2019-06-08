@@ -9,7 +9,7 @@ app.use(compression());
 app.use(express.static("public"));
 app.use(express.json());
 
-// ############################### body parser + cookies ############################# //
+// ########################### body parser + cookies ######################## //
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -29,7 +29,7 @@ app.use(
     })
 );
 
-// ################################ + vulnerabilities ################################ //
+// ############################ + vulnerabilities ########################### //
 
 const csurf = require("csurf");
 
@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-// ################################################################################## //
+// ########################################################################## //
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -53,7 +53,6 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-// ################################# GET AND POST ################################# //
 // ############################ upload img setup ############################ //
 
 var multer = require("multer");
@@ -78,7 +77,8 @@ var uploader = multer({
     }
 });
 
-// ############################################################################# //
+// ########################################################################## //
+// ############################### GET ROUTES ############################### //
 
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
@@ -87,6 +87,51 @@ app.get("/welcome", function(req, res) {
         res.sendFile(__dirname + "/index.html");
     }
 });
+
+app.get("/user", function(req, res) {
+    db.userInfo(req.session.userId)
+        .then(results => {
+            // console.log("feathers typing", results);
+            const avatar = results.rows[0].avatar || "/img/panda3.svg";
+            res.json({
+                id: req.session.userId,
+                first: results.rows[0].first,
+                last: results.rows[0].last,
+                bio: results.rows[0].bio,
+                avatar: avatar
+            });
+        })
+        .catch(err => {
+            console.log("err", err);
+        });
+});
+
+app.get("/otherprofile/:id", function(req, res) {
+    console.log("made it to other profile");
+    let id = req.params.id;
+    console.log("req.params.id:", req.params.id);
+    if (id == req.session.userId) {
+        res.json({ success: false });
+    } else {
+        db.userInfo(id)
+            .then(results => {
+                res.json(results.rows[0]);
+            })
+            .catch(err => {
+                console.log("other profile GET err", err);
+            });
+    }
+});
+
+// app.get("/users", function(req, res, next) {});
+// ################################# logout ################################# //
+
+app.get("/logout", function(req, res) {
+    req.session.userId = null;
+    res.redirect("/");
+});
+
+// ############################## POST ROUTES ############################### //
 
 app.post("/register", function(req, res) {
     bc.hashPassword(req.body.password)
@@ -128,24 +173,6 @@ app.post("/login", function(req, res) {
     });
 });
 
-app.get("/user", function(req, res) {
-    db.userInfo(req.session.userId)
-        .then(results => {
-            // console.log("feathers typing", results);
-            const avatar = results.rows[0].avatar || "/img/panda3.svg";
-            res.json({
-                id: req.session.userId,
-                first: results.rows[0].first,
-                last: results.rows[0].last,
-                bio: results.rows[0].bio,
-                avatar: avatar
-            });
-        })
-        .catch(err => {
-            console.log("err", err);
-        });
-});
-
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     const link =
         `https://s3.amazonaws.com/salt-sawahkraut/` + req.file.filename;
@@ -156,24 +183,8 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
             res.json({ error: "Upload failed. Please try again" });
         });
 });
-app.get("/otherprofile/:id", function(req, res) {
-    console.log("made it to other profile");
-    let id = req.params.id;
-    console.log("req.params.id:", req.params.id);
-    if (id == req.session.userId) {
-        res.json({ success: false });
-    } else {
-        db.userInfo(id)
-            .then(results => {
-                res.json(results.rows[0]);
-            })
-            .catch(err => {
-                console.log("other profile GET err", err);
-            });
-    }
-});
 
-// ################################# edit bio ################################# //
+// ################################ edit bio ################################ //
 
 app.post("/editbio", function(req, res) {
     if (req.body.bio) {
@@ -193,6 +204,8 @@ app.post("/editbio", function(req, res) {
     }
 });
 
+// ########################################################################## //
+
 app.get("*", function(req, res) {
     if (!req.session.userId && req.url != "/welcome") {
         res.redirect("/welcome");
@@ -203,7 +216,6 @@ app.get("*", function(req, res) {
     }
 });
 
-// ####################################################################################
 app.listen(8080, function() {
     console.log("I'm listening");
 });

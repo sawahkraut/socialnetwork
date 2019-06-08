@@ -61,9 +61,11 @@ export default class BioEditor extends React.Component {
                             defaultValue={this.props.bio}
                             onChange={e => this.handleChange(e)}
                         />
-                        <button type="submit" onClick={() => this.submit()}>
-                            save
-                        </button>
+                        <div className="savebutton">
+                            <button type="submit" onClick={() => this.submit()}>
+                                save
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>

@@ -35,6 +35,7 @@ export class Uploader extends React.Component {
                 />
                 <form onSubmit={e => this.submit(e)}>
                     <input
+                        className="modalinput"
                         type="file"
                         name="file"
                         onChange={e => this.handleChange(e)}

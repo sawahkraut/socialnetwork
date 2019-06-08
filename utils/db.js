@@ -49,3 +49,15 @@ module.exports.updateBio = function updateBio(bio, id) {
         [bio, id]
     );
 };
+
+module.exports.updateBio = function findUsers(id, name) {
+    return db.query(
+        `SELECT id, first, last, avatar FROM users
+            WHERE first ILIKE $2
+            OR last ILIKE $2
+            AND id !=$1
+            ORDER BY id
+            DESC LIMIT 3`,
+        [id, `%${name}%`]
+    );
+};
