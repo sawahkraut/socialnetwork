@@ -43,7 +43,7 @@ export function FindUsers() {
                     onChange={handleChange}
                 />
                 <div className="searchedUsers">
-                    {users.length &&
+                    {users.length ? (
                         users.map(user => (
                             <div className="userkey" key={user.id}>
                                 <Link to={`/user/${user.id}`}>
@@ -51,7 +51,10 @@ export function FindUsers() {
                                     {user.first + " " + user.last}
                                 </Link>
                             </div>
-                        ))}
+                        ))
+                    ) : (
+                        <p>No Users Found</p>
+                    )}
                 </div>
             </div>
         </React.Fragment>
