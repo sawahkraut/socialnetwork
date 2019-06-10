@@ -67,7 +67,7 @@ module.exports.lastUsers = function lastUsers(userId) {
         `SELECT id, first, last, avatar FROM users
         WHERE id!=$1
         ORDER BY id DESC
-        LIMIT 4`,
+        LIMIT 3`,
         [userId]
     );
 };

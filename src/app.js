@@ -59,8 +59,10 @@ export class App extends React.Component {
                         <React.Fragment>
                             <header className="header">
                                 <img className="image" src="/img/panda3.svg" />
-
                                 <React.Fragment />
+                                <Link to="/" className="nav">
+                                    Your Profile
+                                </Link>
                                 <Link to="/users" className="nav">
                                     Find Friends
                                 </Link>

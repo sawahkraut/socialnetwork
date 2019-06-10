@@ -35,16 +35,25 @@ export function FindUsers() {
     );
     return (
         <React.Fragment>
-            <input type="text" onChange={handleChange} />
-            {users.length &&
-                users.map(user => (
-                    <div key={user.id}>
-                        <Link to={`/user/${user.id}`}>
-                            <ProfilePic imgUrl={user.avatar} />
-                            {user.first + " " + user.last}
-                        </Link>
-                    </div>
-                ))}
+            <div className="usersearch">
+                <input
+                    className="findpeople"
+                    type="text"
+                    placeholder="Search for Users"
+                    onChange={handleChange}
+                />
+                <div className="searchedUsers">
+                    {users.length &&
+                        users.map(user => (
+                            <div className="userkey" key={user.id}>
+                                <Link to={`/user/${user.id}`}>
+                                    <ProfilePic imgUrl={user.avatar} />
+                                    {user.first + " " + user.last}
+                                </Link>
+                            </div>
+                        ))}
+                </div>
+            </div>
         </React.Fragment>
     );
 }

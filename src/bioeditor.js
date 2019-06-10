@@ -41,7 +41,7 @@ export default class BioEditor extends React.Component {
                     <div>
                         {this.props.bio}
                         <button onClick={() => this.openBioEditor()}>
-                            edit
+                            Edit Bio
                         </button>
                     </div>
                 )}
@@ -49,7 +49,7 @@ export default class BioEditor extends React.Component {
                     <div>
                         <button onClick={() => this.openBioEditor()}>
                             {" "}
-                            add bio
+                            Add Bio
                         </button>
                     </div>
                 )}

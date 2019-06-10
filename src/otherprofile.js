@@ -24,7 +24,7 @@ export class OtherProfile extends React.Component {
     render() {
         // console.log("this.state", this.state);
         return (
-            <div>
+            <div className="otherprofile">
                 <ProfilePic
                     imgUrl={this.state.avatar}
                     first={this.state.first}

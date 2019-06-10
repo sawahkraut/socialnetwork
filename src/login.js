@@ -2,8 +2,7 @@ import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 import { Logo } from "./logo";
-import { Button } from "reactstrap";
-import { Input } from "reactstrap";
+import { Input, Button, Form } from "reactstrap";
 
 export class Login extends React.Component {
     constructor(props) {
@@ -23,7 +22,7 @@ export class Login extends React.Component {
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/logo");
+                    location.replace("/");
                 } else if (data.error) {
                     this.setState({
                         error: data.error
@@ -40,25 +39,28 @@ export class Login extends React.Component {
                     <h1>Tomodachi</h1>
                     <p> {this.state.error} </p>
                     <h5>Login</h5>
-                    <Input
-                        name="email"
-                        placeholder="email"
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <Input
-                        name="password"
-                        placeholder="password"
-                        type="password"
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <Button
-                        outline
-                        color="secondary"
-                        disabled={!this.state.password}
-                        onClick={e => this.submit(e)}
-                    >
-                        submit
-                    </Button>
+                    <Form onSubmit={e => this.submit(e)}>
+                        <Input
+                            name="email"
+                            placeholder="email"
+                            onChange={e => this.handleChange(e)}
+                        />
+                        <Input
+                            name="password"
+                            placeholder="password"
+                            type="password"
+                            onChange={e => this.handleChange(e)}
+                        />
+                        <Button
+                            className="button"
+                            type="submit"
+                            outline
+                            color="secondary"
+                            disabled={!this.state.password}
+                        >
+                            submit
+                        </Button>
+                    </Form>
                     <p>
                         Not a member yet? &nbsp;| &nbsp;
                         <Link to="/">Register</Link>
