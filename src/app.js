@@ -6,6 +6,7 @@ import { Profile } from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import { OtherProfile } from "./otherprofile";
 import { FindUsers } from "./findusers";
+import { Link } from "react-router-dom";
 
 export class App extends React.Component {
     constructor(props) {
@@ -35,6 +36,13 @@ export class App extends React.Component {
                 : { uploaderVisible: true }
         );
     }
+    logout() {
+        axios.get("/logoutUser").then(({ data }) => {
+            if (data.success) {
+                this.props.history.push("/");
+            }
+        });
+    }
     componentDidMount() {
         axios.get("/user").then(({ data }) => {
             // console.log("DATA!", data);
@@ -47,56 +55,67 @@ export class App extends React.Component {
         } else {
             return (
                 <div className="app">
-                    <header className="header">
-                        <img className="image" src="/img/panda3.svg" />
-
-                        <React.Fragment />
-                        <h4 className="nav">Find Friends</h4>
-                        <a href="/" className="nav">
-                            Logout
-                        </a>
-                        <ProfilePic
-                            imgUrl={this.state.avatar}
-                            first={this.state.first}
-                        />
-
-                        {this.state.uploaderVisible && (
-                            <Uploader
-                                imgUrl={this.state.avatar}
-                                first={this.state.first}
-                                updatePic={this.updatePic}
-                                clickHandler={this.clickHandler}
-                            />
-                        )}
-                    </header>
-                    <h5 className="customHr" />
                     <BrowserRouter>
-                        <div>
-                            <Route
-                                exact
-                                path="/"
-                                render={() => (
-                                    <Profile
+                        <React.Fragment>
+                            <header className="header">
+                                <img className="image" src="/img/panda3.svg" />
+
+                                <React.Fragment />
+                                <Link to="/users" className="nav">
+                                    Find Friends
+                                </Link>
+                                <a
+                                    href="/"
+                                    onClick={this.logout}
+                                    className="nav"
+                                >
+                                    Logout
+                                </a>
+                                <ProfilePic
+                                    imgUrl={this.state.avatar}
+                                    first={this.state.first}
+                                />
+
+                                {this.state.uploaderVisible && (
+                                    <Uploader
                                         imgUrl={this.state.avatar}
-                                        bio={this.state.bio}
                                         first={this.state.first}
+                                        updatePic={this.updatePic}
                                         clickHandler={this.clickHandler}
-                                        setBio={this.setBio}
                                     />
                                 )}
-                            />
-                            <Route
-                                path="/user/:id"
-                                render={props => (
-                                    <OtherProfile
-                                        key={props.match.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                )}
-                            />
-                            <Route path="/users" render={() => <FindUsers />} />
-                        </div>
+                            </header>
+                            <h5 className="customHr" />
+                            <div>
+                                <Route
+                                    exact
+                                    path="/"
+                                    render={() => (
+                                        <Profile
+                                            imgUrl={this.state.avatar}
+                                            bio={this.state.bio}
+                                            first={this.state.first}
+                                            clickHandler={this.clickHandler}
+                                            setBio={this.setBio}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/user/:id"
+                                    render={props => (
+                                        <OtherProfile
+                                            key={props.match.url}
+                                            match={props.match}
+                                            history={props.history}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/users"
+                                    render={() => <FindUsers />}
+                                />
+                            </div>
+                        </React.Fragment>
                     </BrowserRouter>
                 </div>
             );
