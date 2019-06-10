@@ -123,8 +123,25 @@ app.get("/otherprofile/:id", function(req, res) {
     }
 });
 
-// app.get("/users", function(req, res, next) {});
-// ################################# logout ################################# //
+app.get("/findusers", async (req, res) => {
+    // because of params; { name:name } in findusers.js
+    let name = req.query.name;
+    if (!name || name == "") {
+        try {
+            const lastUsers = await db.lastUsers(req.session.userId);
+            res.json({ users: lastUsers.rows });
+        } catch (e) {
+            console.log(e);
+        }
+    } else {
+        try {
+            const userArr = await db.findUsers(req.session.userId, name);
+            res.json({ users: userArr.rows });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+});
 
 app.get("/logout", function(req, res) {
     req.session.userId = null;

@@ -5,6 +5,7 @@ import { Uploader } from "./uploader";
 import { Profile } from "./profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import { OtherProfile } from "./otherprofile";
+import { FindUsers } from "./findusers";
 
 export class App extends React.Component {
     constructor(props) {
@@ -94,6 +95,7 @@ export class App extends React.Component {
                                     />
                                 )}
                             />
+                            <Route path="/users" render={() => <FindUsers />} />
                         </div>
                     </BrowserRouter>
                 </div>
