@@ -57,7 +57,7 @@ module.exports.findUsers = function findUsers(id, name) {
             OR last ILIKE $2
             AND id !=$1
             ORDER BY id
-            DESC LIMIT 30`,
+            DESC LIMIT 20`,
         [id, `%${name}%`]
     );
 };

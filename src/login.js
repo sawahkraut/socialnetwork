@@ -14,7 +14,8 @@ export class Login extends React.Component {
             [target.name]: target.value
         });
     } // closes handleChange
-    submit() {
+    submit(e) {
+        e.preventDefault();
         axios
             .post("/login", {
                 email: this.state.email,

@@ -145,7 +145,7 @@ app.get("/findusers", async (req, res) => {
 
 app.get("/logoutUser", function(req, res) {
     req.session = null;
-    res.json({ success: true });
+    res.redirect("/welcome");
 });
 
 // ############################## POST ROUTES ############################### //

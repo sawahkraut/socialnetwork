@@ -66,11 +66,7 @@ export class App extends React.Component {
                                 <Link to="/users" className="nav">
                                     Find Friends
                                 </Link>
-                                <a
-                                    href="/"
-                                    onClick={this.logout}
-                                    className="nav"
-                                >
+                                <a href="/logoutUser" className="nav">
                                     Logout
                                 </a>
                                 <ProfilePic

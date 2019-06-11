@@ -40,9 +40,11 @@ export default class BioEditor extends React.Component {
                 {this.props.bio && !this.state.bioEditorVisible && (
                     <div>
                         {this.props.bio}
-                        <button onClick={() => this.openBioEditor()}>
-                            Edit Bio
-                        </button>
+                        <div className="biobutton">
+                            <button onClick={() => this.openBioEditor()}>
+                                Edit
+                            </button>
+                        </div>
                     </div>
                 )}
                 {!this.props.bio && !this.state.bioEditorVisible && (

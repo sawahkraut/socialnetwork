@@ -16,7 +16,8 @@ export class Registration extends React.Component {
         });
     } // closes handleChange
 
-    submit() {
+    submit(e) {
+        e.preventDefault();
         axios
             .post("/register", {
                 first: this.state.first,

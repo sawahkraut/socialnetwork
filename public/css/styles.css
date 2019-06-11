@@ -173,10 +173,19 @@ h5 {
     font-size: 20px;
     color: #404040;
 }
-.bio button {
-    height: 2rem;
-    width: 6rem;
+/* .bio button {
+    font-size: 14px;
+    height: 1.5rem;
+    width: 4rem;
     margin-top: 1rem;
+    margin-left: 1rem;
+    font-family: "Montserrat";
+} */
+.biobutton {
+    font-size: 14px;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-family: "Montserrat";
 }
 .bioinput {
     height: auto;
