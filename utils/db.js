@@ -71,3 +71,14 @@ module.exports.lastUsers = function lastUsers(userId) {
         [userId]
     );
 };
+
+// ######################### Friend Requests ##################################
+
+module.exports.getFriends = function getFriends(callId, userId) {
+    return db.query(
+        `SELECT * FROM friendships
+        WHERE receiver_id=$1 AND sender_id=$2
+        `,
+        [callId, userId]
+    );
+};

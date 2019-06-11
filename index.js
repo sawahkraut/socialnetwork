@@ -107,9 +107,9 @@ app.get("/user", function(req, res) {
 });
 
 app.get("/otherprofile/:id", function(req, res) {
-    console.log("made it to other profile");
+    // console.log("made it to other profile");
     let id = req.params.id;
-    console.log("req.params.id:", req.params.id);
+    // console.log("req.params.id:", req.params.id);
     if (id == req.session.userId) {
         res.json({ success: false });
     } else {
@@ -146,6 +146,28 @@ app.get("/findusers", async (req, res) => {
 app.get("/logoutUser", function(req, res) {
     req.session = null;
     res.redirect("/welcome");
+});
+
+// ############################ Friend Requests ############################# //
+
+app.get("/friends/:id", async (req, res) => {
+    const friends = await db.getFriends(req.params.id, req.session.userId);
+    if (!friends.rows[0]) {
+        res.json({
+            friends: false,
+            friendsButton: "Send Friend Request"
+        });
+    } else if (friends.rows[0]) {
+        res.json({
+            friends: true,
+            friendsButton: "End Friendship"
+        });
+    } else if (friends.rows[0].accepted == false) {
+        res.json({
+            friends: "pending",
+            friendsButton: "Accept Friend Request"
+        });
+    }
 });
 
 // ############################## POST ROUTES ############################### //

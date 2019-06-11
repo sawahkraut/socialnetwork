@@ -93,6 +93,7 @@ export class App extends React.Component {
                                             imgUrl={this.state.avatar}
                                             bio={this.state.bio}
                                             first={this.state.first}
+                                            last={this.state.last}
                                             clickHandler={this.clickHandler}
                                             setBio={this.setBio}
                                         />

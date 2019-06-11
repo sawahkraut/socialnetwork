@@ -56,7 +56,7 @@ export class Login extends React.Component {
                             className="button"
                             type="submit"
                             outline
-                            color="secondary"
+                            color="info"
                             disabled={!this.state.password}
                         >
                             submit
