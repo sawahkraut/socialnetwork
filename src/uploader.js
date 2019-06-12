@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import ProfilePic from "./profilepic";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 export class Uploader extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export class Uploader extends React.Component {
             avatar: null
         };
     }
+
     handleChange(e) {
         this.setState({
             profilePicture: e.target.files[0],
@@ -27,25 +29,45 @@ export class Uploader extends React.Component {
     }
     render() {
         return (
-            <div className="modal">
-                <ProfilePic
-                    imgUrl={this.props.imgUrl}
-                    first={this.props.first}
-                    last={this.props.last}
-                />
-                <form onSubmit={e => this.submit(e)}>
-                    <input
-                        className="modalinput"
-                        type="file"
-                        name="file"
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <button disable={!this.state.profilePicture} type="submit">
-                        upload
-                    </button>
-                    {this.state.error && <p>{this.state.error}</p>}
-                    <label>upload profile photo</label>
-                </form>
+            <div>
+                <Modal
+                    isOpen={this.props.modal}
+                    clickHandler={this.props.clickHandler}
+                >
+                    <ModalHeader>
+                        Update your Profile Picture
+                        <ProfilePic
+                            imgUrl={this.props.imgUrl}
+                            first={this.props.first}
+                            last={this.props.last}
+                        />
+                    </ModalHeader>
+                    <ModalBody>
+                        <form onSubmit={e => this.submit(e)}>
+                            <input
+                                className="modalinput"
+                                type="file"
+                                name="file"
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <Button
+                                color="secondary"
+                                onClick={this.props.clickHandler}
+                                disable={!this.state.profilePicture}
+                                type="submit"
+                            >
+                                Upload
+                            </Button>
+                            {this.state.error && <p>{this.state.error}</p>}
+                            <label>Upload Profile Photo</label>
+                        </form>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="info" onClick={this.props.clickHandler}>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </Modal>
             </div>
         );
     }

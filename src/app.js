@@ -12,7 +12,7 @@ export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            uploaderVisible: false
+            modal: false
         };
         this.updatePic = this.updatePic.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
@@ -26,15 +26,14 @@ export class App extends React.Component {
     updatePic(url) {
         this.setState({
             avatar: url,
-            uploaderVisible: false
+            modal: false
         });
     }
     clickHandler() {
-        this.setState(
-            this.state.uploaderVisible
-                ? { uploaderVisible: false }
-                : { uploaderVisible: true }
-        );
+        this.setState(prevState => {
+            console.log(prevState);
+            return { modal: !prevState.modal };
+        });
     }
     logout() {
         axios.get("/logoutUser").then(({ data }) => {
@@ -58,7 +57,8 @@ export class App extends React.Component {
                     <BrowserRouter>
                         <React.Fragment>
                             <header className="header">
-                                <img className="image" src="/img/panda3.svg" />
+                                <i className="fas fa-dragon fa-2x" />
+
                                 <React.Fragment />
                                 <Link to="/" className="nav">
                                     Your Profile
@@ -73,16 +73,18 @@ export class App extends React.Component {
                                     imgUrl={this.state.avatar}
                                     first={this.state.first}
                                 />
-
-                                {this.state.uploaderVisible && (
-                                    <Uploader
-                                        imgUrl={this.state.avatar}
-                                        first={this.state.first}
-                                        updatePic={this.updatePic}
-                                        clickHandler={this.clickHandler}
-                                    />
-                                )}
                             </header>
+
+                            {this.state.modal && (
+                                <Uploader
+                                    imgUrl={this.state.avatar}
+                                    first={this.state.first}
+                                    updatePic={this.updatePic}
+                                    clickHandler={this.clickHandler}
+                                    modal={this.state.modal}
+                                />
+                            )}
+
                             <h5 className="customHr" />
                             <div>
                                 <Route
@@ -121,3 +123,4 @@ export class App extends React.Component {
         }
     }
 }
+// <img className="image" src="/img/panda3.svg" />

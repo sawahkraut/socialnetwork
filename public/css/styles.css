@@ -99,7 +99,7 @@ h5 {
     height: 6rem;
     width: 6rem;
 }
-.modal {
+/* .modal {
     display: flex;
     position: fixed;
     flex-direction: column;
@@ -122,12 +122,20 @@ h5 {
     height: 15rem;
     width: auto;
     margin-left: 5rem;
-}
+} */
 .modalinput {
     padding: 0.3rem;
     width: auto;
     height: auto;
 }
+/* .modalpic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+} */
 .modal form {
     padding: 3rem;
     margin-left: 6rem;
@@ -213,4 +221,8 @@ a {
 }
 .userkey {
     padding: 0.5rem;
+}
+.fas,
+.fa-dragon {
+    margin-top: 2rem;
 }

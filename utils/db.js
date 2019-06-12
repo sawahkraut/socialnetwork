@@ -85,7 +85,7 @@ module.exports.getFriends = function getFriends(callId, userId) {
 };
 
 module.exports.startFriendship = function startFriendship(callId, userId) {
-    console.log("startFriendship query :", callId, userId);
+    // console.log("startFriendship query :", callId, userId);
     return db.query(
         `INSERT INTO friendships
         (receiver_id, sender_id) VALUES ($1, $2)
