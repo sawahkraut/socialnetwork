@@ -37,7 +37,7 @@ export class OtherProfile extends React.Component {
                 <h1>
                     {this.state.first} {this.state.last}
                 </h1>
-                <div>{this.state.bio}</div>
+                <div className="usersbio">{this.state.bio}</div>
             </div>
         );
     }

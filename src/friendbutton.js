@@ -6,6 +6,7 @@ export class FriendButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.submit = this.submit.bind(this);
     }
     componentDidMount() {
         const callId = this.props.callId;
@@ -21,6 +22,17 @@ export class FriendButton extends React.Component {
     }
 
     submit() {
+        let obj = {
+            friends: this.state.friends,
+            callId: this.props.callId
+        };
+        axios
+            .post("/friends", obj)
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+
         // axios
         //     .post("/editbio", { bio: this.state.bio })
         //     .then(results => {
@@ -37,7 +49,7 @@ export class FriendButton extends React.Component {
 
     render() {
         return (
-            <Button outline color="info" onClick={this.submit()}>
+            <Button outline color="info" onClick={this.submit}>
                 {this.state.friendsButton}
             </Button>
         );

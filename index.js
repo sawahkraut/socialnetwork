@@ -150,6 +150,7 @@ app.get("/logoutUser", function(req, res) {
 
 // ############################ Friend Requests ############################# //
 
+// defines user relationship
 app.get("/friends/:id", async (req, res) => {
     const friends = await db.getFriends(req.params.id, req.session.userId);
     if (!friends.rows[0]) {
@@ -162,11 +163,35 @@ app.get("/friends/:id", async (req, res) => {
             friends: true,
             friendsButton: "End Friendship"
         });
-    } else if (friends.rows[0].accepted == false) {
+    } else if (
+        friends.rows[0].accepted == false &&
+        friends.rows[0].receiver_id == req.session.userId
+    ) {
         res.json({
-            friends: "pending",
-            friendsButton: "Accept Friend Request"
+            friends: "cancel",
+            friendsButton: "Cancel Friend Request"
         });
+    }
+});
+
+// sets a relationship status of users
+app.post("/friends", async (req, res) => {
+    if (req.body.friends == false) {
+        const results = await db.startFriendship(
+            req.params.id,
+            req.session.userId
+        );
+        console.log("it works");
+    } else if (req.body.friends == true || req.body.friends == "cancel") {
+        const results = await db.deleteFriend(
+            req.params.id,
+            req.session.userId
+        );
+    } else if (req.body.friends == "pending") {
+        const results = await db.updateFriend(
+            req.params.id,
+            req.session.userId
+        );
     }
 });
 
