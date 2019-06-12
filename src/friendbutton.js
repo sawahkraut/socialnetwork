@@ -29,24 +29,13 @@ export class FriendButton extends React.Component {
         axios
             .post("/friends", obj)
             .then(({ data }) => {
-                console.log(data);
+                this.setState({
+                    friendsButton: data.friendsButton,
+                    friends: data.friends
+                });
             })
             .catch(err => console.log(err));
-
-        // axios
-        //     .post("/editbio", { bio: this.state.bio })
-        //     .then(results => {
-        //         console.log("results ", results);
-        //         this.setState({
-        //             bioEditorVisible: false
-        //         });
-        //         this.props.setBio(this.state.bio);
-        //     })
-        //     .catch(err => {
-        //         console.log("profile bioeditor ", err);
-        //     });
     }
-
     render() {
         return (
             <Button outline color="info" onClick={this.submit}>

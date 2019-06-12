@@ -85,9 +85,19 @@ module.exports.getFriends = function getFriends(callId, userId) {
 };
 
 module.exports.startFriendship = function startFriendship(callId, userId) {
+    console.log("startFriendship query :", callId, userId);
     return db.query(
         `INSERT INTO friendships
         (receiver_id, sender_id) VALUES ($1, $2)
+        `,
+        [callId, userId]
+    );
+};
+
+module.exports.updateFriend = function updateFriend(callId, userId) {
+    return db.query(
+        `UPDATE friendships SET accepted = true
+        WHERE receiver_id=$2 AND sender_id=$1
         `,
         [callId, userId]
     );
@@ -98,15 +108,6 @@ module.exports.deleteFriend = function deleteFriend(callId, userId) {
         `DELETE FROM friendships
         WHERE receiver_id=$1 AND sender_id=$2
         OR sender_id=$1 AND receiver_id=$2
-        `,
-        [callId, userId]
-    );
-};
-
-module.exports.updateFriend = function updateFriend(callId, userId) {
-    return db.query(
-        `UPDATE friendships SET accepted = true
-        WHERE receiver_id=$2 AND sender_id=$1
         `,
         [callId, userId]
     );

@@ -154,44 +154,68 @@ app.get("/logoutUser", function(req, res) {
 app.get("/friends/:id", async (req, res) => {
     const friends = await db.getFriends(req.params.id, req.session.userId);
     if (!friends.rows[0]) {
+        console.log(" send friend request");
         res.json({
             friends: false,
             friendsButton: "Send Friend Request"
         });
-    } else if (friends.rows[0]) {
+    } else if (friends.rows[0].accepted == true) {
+        console.log("end friend ship");
         res.json({
             friends: true,
             friendsButton: "End Friendship"
         });
     } else if (
         friends.rows[0].accepted == false &&
-        friends.rows[0].receiver_id == req.session.userId
+        friends.rows[0].sender_id == req.session.userId
     ) {
+        console.log("cancel friend ship");
         res.json({
             friends: "cancel",
             friendsButton: "Cancel Friend Request"
+        });
+    } else if (
+        friends.rows[0].accepted == false &&
+        friends.rows[0].receiver_id == req.session.userId
+    ) {
+        console.log("accept friend request");
+        res.json({
+            friends: "pending",
+            friendsButton: "Accept Friend Request "
         });
     }
 });
 
 // sets a relationship status of users
 app.post("/friends", async (req, res) => {
+    console.log("req.body", req.body);
     if (req.body.friends == false) {
         const results = await db.startFriendship(
-            req.params.id,
+            req.body.callId,
             req.session.userId
         );
-        console.log("it works");
+        res.json({
+            friends: "cancel",
+            friendsButton: "Cancel Friend Request"
+        });
     } else if (req.body.friends == true || req.body.friends == "cancel") {
         const results = await db.deleteFriend(
-            req.params.id,
+            req.body.callId,
             req.session.userId
         );
+        res.json({
+            friends: false,
+            friendsButton: "Send Friend Request"
+        });
     } else if (req.body.friends == "pending") {
         const results = await db.updateFriend(
-            req.params.id,
+            req.body.callId,
             req.session.userId
         );
+        res.json({
+            friends: "pending",
+            friendsButton: "Accept Friend Request"
+        });
     }
 });
 
