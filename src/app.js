@@ -64,7 +64,7 @@ export class App extends React.Component {
                                     Your Profile
                                 </Link>
                                 <Link to="/users" className="nav">
-                                    Find Friends
+                                    Search Tomodachi
                                 </Link>
                                 <a href="/logoutUser" className="nav">
                                     Logout

@@ -292,6 +292,13 @@ app.post("/editbio", function(req, res) {
     }
 });
 
+// ############################ Redux ######################################### //
+
+// app.get("/get-list-friends", (req, res) => {
+//     let friends = [];
+//     res.json(friends);
+// });
+
 // ########################################################################## //
 
 app.get("*", function(req, res) {

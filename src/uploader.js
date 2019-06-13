@@ -30,10 +30,7 @@ export class Uploader extends React.Component {
     render() {
         return (
             <div>
-                <Modal
-                    isOpen={this.props.modal}
-                    clickHandler={this.props.clickHandler}
-                >
+                <Modal isOpen={this.props.modal}>
                     <ModalHeader>
                         Update your Profile Picture
                         <ProfilePic
@@ -43,24 +40,26 @@ export class Uploader extends React.Component {
                         />
                     </ModalHeader>
                     <ModalBody>
-                        <form onSubmit={e => this.submit(e)}>
+                        <form>
                             <input
                                 className="modalinput"
                                 type="file"
                                 name="file"
                                 onChange={e => this.handleChange(e)}
                             />
-                            <Button
-                                color="secondary"
-                                onClick={this.props.clickHandler}
-                                disable={!this.state.profilePicture}
-                                type="submit"
-                            >
-                                Upload
-                            </Button>
-                            {this.state.error && <p>{this.state.error}</p>}
-                            <label>Upload Profile Photo</label>
                         </form>
+                        <Button
+                            color="secondary"
+                            onClick={e => {
+                                this.props.clickHandler;
+                                this.submit(e);
+                            }}
+                            disable={!this.state.profilePicture + ""}
+                        >
+                            Upload
+                        </Button>
+                        {this.state.error && <p>{this.state.error}</p>}
+                        <label>Upload Profile Photo</label>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="info" onClick={this.props.clickHandler}>

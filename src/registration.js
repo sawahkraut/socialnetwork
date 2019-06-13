@@ -31,7 +31,7 @@ export class Registration extends React.Component {
                     // console.log("user id exists :", data.userId);
                 } else if (data.error) {
                     this.setState({
-                        error: "Catastrophic Failure!"
+                        error: "You entered an invalid email or password"
                     });
                 }
             });
