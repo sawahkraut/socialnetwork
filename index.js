@@ -287,7 +287,7 @@ app.post("/editbio", function(req, res) {
 
 app.get("/get-friends-list", async (req, res) => {
     const friendList = await db.getFriendsList(req.session.userId);
-    console.log("friendList.rows", friendList.rows);
+    // console.log("friendList.rows", friendList.rows);
     res.json({ friends: friendList.rows });
 });
 

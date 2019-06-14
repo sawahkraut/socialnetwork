@@ -99,43 +99,11 @@ h5 {
     height: 6rem;
     width: 6rem;
 }
-/* .modal {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    max-width: 100%;
-    height: 550px;
-    max-height: 100%;
-    padding: 20px 50px 20px 20px;
-    overflow: auto;
-    z-index: 9;
-    background-color: #d1d1d1;
-    filter: drop-shadow(0 0 0.75rem black);
-}
-.modal img {
-    height: 15rem;
-    width: auto;
-    margin-left: 5rem;
-} */
 .modalinput {
     padding: 0.3rem;
     width: auto;
     height: auto;
 }
-/* .modalpic {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-} */
 .modal form {
     padding: 3rem;
     margin-left: 6rem;
@@ -143,6 +111,10 @@ h5 {
     height: auto;
     font-family: "Montserrat";
 }
+/* .modal-body {
+    display: flex;
+    flex-direction: row;
+} */
 .customHr {
     display: flex;
     flex-direction: row;
@@ -242,4 +214,9 @@ a {
     color: #f88757;
     font-family: "Inconsolata";
     font-size: 18px;
+}
+.yourname {
+    color: #f88757;
+    font-size: 18px;
+    font-weight: bolder;
 }

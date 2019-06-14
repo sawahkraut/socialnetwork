@@ -32,7 +32,7 @@ export class App extends React.Component {
     }
     clickHandler() {
         this.setState(prevState => {
-            console.log(prevState);
+            // console.log(prevState);
             return { modal: !prevState.modal };
         });
     }
@@ -59,8 +59,15 @@ export class App extends React.Component {
                         <React.Fragment>
                             <header className="header">
                                 <i className="fas fa-dragon fa-2x" />
-
+                                <p className="nav">
+                                    Kon'nichiwa, &nbsp;&nbsp;{" "}
+                                    <div className="yourname">
+                                        {this.state.first}
+                                    </div>
+                                    &nbsp;&nbsp;
+                                </p>
                                 <React.Fragment />
+
                                 <Link to="/" className="nav">
                                     Your Profile
                                 </Link>

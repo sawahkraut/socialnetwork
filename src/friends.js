@@ -11,7 +11,9 @@ function Friends(props) {
 
     return (
         <React.Fragment>
-            <p className="yourfollowers">Your Followers</p>
+            <p className="yourfollowers">
+                Your Followers ({props.friends && props.friends.length})
+            </p>
             <div className="friendlistAccepted">
                 {props.friends ? (
                     props.friends.map(friend => (
