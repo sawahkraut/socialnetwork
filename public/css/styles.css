@@ -227,3 +227,19 @@ a {
 .fa-dragon {
     margin-top: 2rem;
 }
+.friendlistAccepted {
+    display: flex;
+    margin-top: 4rem;
+    margin-left: 2rem;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    font-family: "Montserrat";
+}
+.yourfollowers {
+    display: flex;
+    margin-top: 4rem;
+    margin-left: 2rem;
+    color: #f88757;
+    font-family: "Inconsolata";
+    font-size: 18px;
+}

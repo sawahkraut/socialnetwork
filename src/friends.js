@@ -11,18 +11,21 @@ function Friends(props) {
 
     return (
         <React.Fragment>
-            {props.friends ? (
-                props.friends.map(friend => (
-                    <div key={friend.id}>
-                        <Link to={`/user/${friend.id}`}>
-                            <ProfilePic imgUrl={friend.avatar} />
-                            {friend.first + " " + friend.last}
-                        </Link>
-                    </div>
-                ))
-            ) : (
-                <p>No Users Found</p>
-            )}
+            <p className="yourfollowers">Your Followers</p>
+            <div className="friendlistAccepted">
+                {props.friends ? (
+                    props.friends.map(friend => (
+                        <div key={friend.id}>
+                            <Link to={`/user/${friend.id}`}>
+                                <ProfilePic imgUrl={friend.avatar} />
+                                {friend.first + " " + friend.last}
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p>No Users Found</p>
+                )}
+            </div>
         </React.Fragment>
     );
 }
