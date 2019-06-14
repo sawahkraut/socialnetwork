@@ -190,31 +190,22 @@ app.get("/friends/:id", async (req, res) => {
 app.post("/friends", async (req, res) => {
     // console.log("req.body", req.body);
     if (req.body.friends == false) {
-        const results = await db.startFriendship(
-            req.body.callId,
-            req.session.userId
-        );
+        await db.startFriendship(req.body.callId, req.session.userId);
         res.json({
             friends: "cancel",
             friendsButton: "Cancel Friend Request"
         });
     } else if (req.body.friends == true || req.body.friends == "cancel") {
-        const results = await db.deleteFriend(
-            req.body.callId,
-            req.session.userId
-        );
+        await db.deleteFriend(req.body.callId, req.session.userId);
         res.json({
             friends: false,
             friendsButton: "Send Friend Request"
         });
     } else if (req.body.friends == "pending") {
-        const results = await db.updateFriend(
-            req.body.callId,
-            req.session.userId
-        );
+        await db.updateFriend(req.body.callId, req.session.userId);
         res.json({
-            friends: "pending",
-            friendsButton: "Accept Friend Request"
+            friends: true,
+            friendsButton: "End Friendship"
         });
     }
 });
@@ -292,12 +283,13 @@ app.post("/editbio", function(req, res) {
     }
 });
 
-// ############################ Redux ######################################### //
+// ######################### get friends list ############################### //
 
-// app.get("/get-list-friends", (req, res) => {
-//     let friends = [];
-//     res.json(friends);
-// });
+app.get("/get-friends-list", async (req, res) => {
+    const friendList = await db.getFriendsList(req.session.userId);
+    console.log("friendList.rows", friendList.rows);
+    res.json({ friends: friendList.rows });
+});
 
 // ########################################################################## //
 

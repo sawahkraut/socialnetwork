@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { OtherProfile } from "./otherprofile";
 import { FindUsers } from "./findusers";
 import { Link } from "react-router-dom";
+import Friends from "./friends";
 
 export class App extends React.Component {
     constructor(props) {
@@ -63,6 +64,9 @@ export class App extends React.Component {
                                 <Link to="/" className="nav">
                                     Your Profile
                                 </Link>
+                                <Link to="/friends" className="nav">
+                                    Your Tomodachi
+                                </Link>
                                 <Link to="/users" className="nav">
                                     Search Tomodachi
                                 </Link>
@@ -115,6 +119,7 @@ export class App extends React.Component {
                                     path="/users"
                                     render={() => <FindUsers />}
                                 />
+                                <Route path="/friends" component={Friends} />
                             </div>
                         </React.Fragment>
                     </BrowserRouter>

@@ -3,10 +3,11 @@
 import axios from "./axios";
 
 export function getListOfFriends() {
-    return axios.get("/get-list-friends").then(({ data }) => {
+    return axios.get("/get-friends-list").then(({ data }) => {
+        console.log("ACTIONS!!!!!", data.friends);
         return {
             type: "ADD_LIST_FRIENDS",
-            listFriends: data
+            friends: data.friends
         };
     });
 }

@@ -80,7 +80,7 @@ h5 {
 .nav {
     font-family: "Montserrat";
     color: black;
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 2rem;
 }
 
@@ -176,6 +176,7 @@ h5 {
 }
 .biotitle {
     font-size: 40px;
+    font-family: "Inconsolata";
 }
 .bio {
     font-size: 20px;

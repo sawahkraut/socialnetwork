@@ -113,13 +113,16 @@ module.exports.deleteFriend = function deleteFriend(callId, userId) {
     );
 };
 
-module.exports.friends = function friends() {
-    return db.query(`
+module.exports.getFriendsList = function getFriendsList(userId) {
+    return db.query(
+        `
     SELECT users.id, first, last, avatar, accepted
     FROM friendships
     JOIN users
     ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
     OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
-    OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
-`);
+    OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+`,
+        [userId]
+    );
 };
