@@ -20,7 +20,7 @@ export function unfriend(friendId) {
     return axios
         .post("/friends", obj)
         .then(({ data }) => {
-            console.log(data);
+            // console.log(data);
             if (data.success) {
                 return {
                     type: "UNFRIEND",
@@ -39,7 +39,7 @@ export function addUser(friendId) {
     return axios
         .post("/friends", obj)
         .then(({ data }) => {
-            console.log("accept friend post", data);
+            // console.log("accept friend post", data);
             if (data.success) {
                 return {
                     type: "BE_FRIEND",

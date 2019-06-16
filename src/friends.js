@@ -31,50 +31,59 @@ function Friends(props) {
                 {props.friends ? (
                     props.friends.map(friend => (
                         <div key={friend.id}>
-                            <Link to={`/user/${friend.id}`}>
-                                <ProfilePic imgUrl={friend.avatar} />
-                                {friend.first + " " + friend.last}
-                            </Link>
-                            <Button
-                                outline
-                                color="info"
-                                size="sm"
-                                onClick={() => endFriendship(friend.id)}
-                            >
-                                Unfriend
-                            </Button>
+                            <div className="followers">
+                                <Link to={`/user/${friend.id}`}>
+                                    <ProfilePic imgUrl={friend.avatar} />
+                                    {friend.first + " " + friend.last}
+                                </Link>
+                            </div>
+                            <div className="unfriendbtn">
+                                <Button
+                                    outline
+                                    color="info"
+                                    size="sm"
+                                    onClick={() => endFriendship(friend.id)}
+                                >
+                                    Unfriend
+                                </Button>
+                            </div>
                         </div>
                     ))
                 ) : (
                     <p>No Users Found</p>
                 )}
             </div>
-            <p className="yourfollowers">
+            <p className="yourwannabes">
                 Pending ({props.pending && props.pending.length})
             </p>
             <div className="friendlistAccepted">
                 {props.pending ? (
                     props.pending.map(friend => (
                         <div key={friend.id}>
-                            <Link to={`/user/${friend.id}`}>
-                                <ProfilePic imgUrl={friend.avatar} />
-                                {friend.first + " " + friend.last}
-                            </Link>
-                            <Button
-                                outline
-                                color="info"
-                                size="sm"
-                                onClick={() => acceptFriend(friend.id)}
-                            >
-                                Accept
-                            </Button>
-                            <Button
-                                color="danger"
-                                size="sm"
-                                onClick={() => rejectUser(friend.id)}
-                            >
-                                Reject
-                            </Button>
+                            <div className="followers">
+                                <Link to={`/user/${friend.id}`}>
+                                    <ProfilePic imgUrl={friend.avatar} />
+                                    {friend.first + " " + friend.last}
+                                </Link>
+                            </div>
+                            <div className="rejectbtn">
+                                <Button
+                                    outline
+                                    color="info"
+                                    size="sm"
+                                    onClick={() => acceptFriend(friend.id)}
+                                >
+                                    Accept
+                                </Button>
+
+                                <Button
+                                    color="danger"
+                                    size="sm"
+                                    onClick={() => rejectUser(friend.id)}
+                                >
+                                    Decline
+                                </Button>
+                            </div>
                         </div>
                     ))
                 ) : (

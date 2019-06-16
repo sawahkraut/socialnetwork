@@ -81,6 +81,7 @@ export class App extends React.Component {
                                     Logout
                                 </a>
                                 <ProfilePic
+                                    className={"navpic"}
                                     imgUrl={this.state.avatar}
                                     first={this.state.first}
                                 />

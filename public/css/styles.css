@@ -93,7 +93,18 @@ h5 {
     z-index: 8;
     object-fit: contain;
     padding-right: 2rem;
-    /* padding-top: 0.3rem; */
+    cursor: pointer;
+}
+.navpic {
+    display: flex;
+    justify-content: flex-end;
+    height: 14vh;
+    width: 12vw;
+    left: 50vh;
+    z-index: 8;
+    object-fit: contain;
+    padding-right: 2rem;
+    padding-top: 1rem;
 }
 .image {
     height: 6rem;
@@ -104,17 +115,16 @@ h5 {
     width: auto;
     height: auto;
 }
-.modal form {
-    padding: 3rem;
-    margin-left: 6rem;
-    width: auto;
-    height: auto;
-    font-family: "Montserrat";
-}
-/* .modal-body {
+.modal-title {
     display: flex;
-    flex-direction: row;
-} */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    left: 10px;
+    margin-left: 4rem;
+}
+
 .customHr {
     display: flex;
     flex-direction: row;
@@ -138,7 +148,7 @@ h5 {
 .profile-bio {
     display: flex;
     flex-direction: row;
-    margin-left: 4rem;
+    margin-left: 6rem;
     width: 40rem;
 }
 .profile-bio img {
@@ -209,7 +219,14 @@ a {
 }
 .yourfollowers {
     display: flex;
-    margin-top: 4rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    color: #f88757;
+    font-family: "Inconsolata";
+    font-size: 18px;
+}
+.yourwannabes {
+    display: flex;
     margin-left: 2rem;
     color: #f88757;
     font-family: "Inconsolata";
@@ -219,4 +236,50 @@ a {
     color: #f88757;
     font-size: 18px;
     font-weight: bolder;
+}
+.unfriendbtn {
+    margin: 1rem;
+}
+.rejectbtn {
+    margin-bottom: 2rem;
+}
+.followers {
+    margin: 1rem;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.uploadbtn:hover {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
+}
+.modalpic {
+    height: 25vh;
+    width: 21.5vw;
+    margin: 20px;
+    object-fit: contain;
+}
+
+.uploadbtn {
+    border: 2px solid #f88757;
+    color: #f88757;
+    background-color: white;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: "Montserrat";
+    width: auto;
+    height: auto;
+    margin-left: 8rem;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }

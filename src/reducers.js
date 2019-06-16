@@ -16,7 +16,7 @@ export default function reducer(state = {}, action) {
         };
     }
     if (action.type == "BE_FRIEND") {
-        console.log("I made it to BE_FRIEND in reducers", action.newFriend);
+        // console.log("I made it to BE_FRIEND in reducers", action.newFriend);
         return {
             ...state,
             friends: state.friends.map(friend => {

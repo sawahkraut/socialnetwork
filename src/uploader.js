@@ -12,11 +12,12 @@ export class Uploader extends React.Component {
         };
     }
 
-    handleChange(e) {
-        this.setState({
+    async handleChange(e) {
+        await this.setState({
             profilePicture: e.target.files[0],
             loaded: 0
         });
+        this.submit(e);
     }
     submit(e) {
         e.preventDefault();
@@ -34,35 +35,31 @@ export class Uploader extends React.Component {
                     <ModalHeader>
                         Update your Profile Picture
                         <ProfilePic
+                            className={"modalpic"}
                             imgUrl={this.props.imgUrl}
                             first={this.props.first}
                             last={this.props.last}
                         />
                     </ModalHeader>
                     <ModalBody>
-                        <form>
+                        <form className="upload-btn-wrapper">
                             <input
-                                className="modalinput"
                                 type="file"
                                 name="file"
                                 onChange={e => this.handleChange(e)}
                             />
+                            <button className="uploadbtn">
+                                Change Profile Picture
+                            </button>
                         </form>
-                        <Button
-                            color="secondary"
-                            onClick={e => {
-                                this.props.clickHandler;
-                                this.submit(e);
-                            }}
-                            disable={!this.state.profilePicture + ""}
-                        >
-                            Upload
-                        </Button>
                         {this.state.error && <p>{this.state.error}</p>}
-                        <label>Upload Profile Photo</label>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="info" onClick={this.props.clickHandler}>
+                        <Button
+                            outline
+                            color="secondary"
+                            onClick={this.props.clickHandler}
+                        >
                             Close
                         </Button>
                     </ModalFooter>

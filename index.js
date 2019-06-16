@@ -188,7 +188,7 @@ app.get("/friends/:id", async (req, res) => {
 
 // sets a relationship status of users
 app.post("/friends", async (req, res) => {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     if (req.body.friends == false) {
         await db.startFriendship(req.body.callId, req.session.userId);
         res.json({
