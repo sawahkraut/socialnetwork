@@ -188,7 +188,7 @@ app.get("/friends/:id", async (req, res) => {
 
 // sets a relationship status of users
 app.post("/friends", async (req, res) => {
-    // console.log("req.body", req.body);
+    console.log("req.body", req.body);
     if (req.body.friends == false) {
         await db.startFriendship(req.body.callId, req.session.userId);
         res.json({
@@ -198,12 +198,14 @@ app.post("/friends", async (req, res) => {
     } else if (req.body.friends == true || req.body.friends == "cancel") {
         await db.deleteFriend(req.body.callId, req.session.userId);
         res.json({
+            success: true,
             friends: false,
             friendsButton: "Send Friend Request"
         });
     } else if (req.body.friends == "pending") {
         await db.updateFriend(req.body.callId, req.session.userId);
         res.json({
+            success: true,
             friends: true,
             friendsButton: "End Friendship"
         });

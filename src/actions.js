@@ -11,3 +11,41 @@ export function getListOfFriends() {
         };
     });
 }
+// friendId is now in object, drnfinh yo backend and to unfriend them
+export function unfriend(friendId) {
+    let obj = {
+        friends: true,
+        callId: friendId //
+    };
+    return axios
+        .post("/friends", obj)
+        .then(({ data }) => {
+            console.log(data);
+            if (data.success) {
+                return {
+                    type: "UNFRIEND",
+                    oldFriend: friendId
+                };
+            }
+        })
+        .catch(err => console.log(err));
+}
+
+export function addUser(friendId) {
+    let obj = {
+        friends: "pending",
+        callId: friendId
+    };
+    return axios
+        .post("/friends", obj)
+        .then(({ data }) => {
+            console.log("accept friend post", data);
+            if (data.success) {
+                return {
+                    type: "BE_FRIEND",
+                    newFriend: friendId
+                };
+            }
+        })
+        .catch(err => console.log(err));
+}
