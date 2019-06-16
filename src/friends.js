@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getListOfFriends, unfriend, addUser } from "./actions";
+import { getListOfFriends, unfriend, addUser, reject } from "./actions";
 import ProfilePic from "./profilepic";
 import { Button } from "reactstrap";
 
@@ -16,6 +16,10 @@ function Friends(props) {
 
     function acceptFriend(friendId) {
         props.dispatch(addUser(friendId));
+    }
+
+    function rejectUser(friendId) {
+        props.dispatch(reject(friendId));
     }
 
     return (
@@ -64,7 +68,11 @@ function Friends(props) {
                             >
                                 Accept
                             </Button>
-                            <Button color="danger" size="sm">
+                            <Button
+                                color="danger"
+                                size="sm"
+                                onClick={() => rejectUser(friend.id)}
+                            >
                                 Reject
                             </Button>
                         </div>

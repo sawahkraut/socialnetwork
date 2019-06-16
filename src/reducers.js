@@ -27,5 +27,13 @@ export default function reducer(state = {}, action) {
             })
         };
     }
+    if (action.type == "REJECT") {
+        return {
+            ...state,
+            friends: state.friends.filter(
+                friend => friend.id != action.rejectRequest
+            )
+        };
+    }
     return state;
 }

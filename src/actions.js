@@ -49,3 +49,21 @@ export function addUser(friendId) {
         })
         .catch(err => console.log(err));
 }
+
+export function reject(friendId) {
+    let obj = {
+        friends: "reject",
+        callId: friendId
+    };
+    return axios
+        .post("/friends", obj)
+        .then(({ data }) => {
+            if (data.success) {
+                return {
+                    type: "REJECT",
+                    rejectRequest: friendId
+                };
+            }
+        })
+        .catch(err => console.log(err));
+}

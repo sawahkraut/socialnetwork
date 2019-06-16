@@ -195,7 +195,11 @@ app.post("/friends", async (req, res) => {
             friends: "cancel",
             friendsButton: "Cancel Friend Request"
         });
-    } else if (req.body.friends == true || req.body.friends == "cancel") {
+    } else if (
+        req.body.friends == true ||
+        req.body.friends == "cancel" ||
+        req.body.friends == "reject"
+    ) {
         await db.deleteFriend(req.body.callId, req.session.userId);
         res.json({
             success: true,
