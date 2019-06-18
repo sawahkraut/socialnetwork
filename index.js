@@ -4,6 +4,9 @@ const bc = require("./utils/bc");
 const compression = require("compression");
 const app = express();
 const s3 = require("./s3");
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
+// (server, { origins: "localhost:8080" saratu.heroku.app:* });
 
 app.use(compression());
 app.use(express.static("public"));
@@ -22,12 +25,14 @@ app.use(
 );
 
 const cookieSession = require("cookie-session");
-app.use(
-    cookieSession({
-        secret: `I won't say`,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 // ############################ + vulnerabilities ########################### //
 
@@ -309,6 +314,37 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening");
+});
+
+// ######################## SOCKET IO ######################## //
+
+// io.on("connection", function(socket) {
+//     if (!userId) {
+//         return socket.disconnect(true);
+//     }
+//     const userId = socket.request.session.userId;
+// });
+
+// sends to selected server
+// socket.on("welcome", function(data) {
+//     console.log(data);
+//     socket.emit("thanks", {
+//         message: "Thank you. It is great to be here."
+//     });
+// });
+// sends to everyone globally
+// io.emit("globalMessage", {
+//     message: "yo"
+// });
+// object representing all sockets connected
+// io.sockets.emit("globalMessage");
+
+// socket - object that represents a server connection
+io.on("connection", socket => {
+    console.log(`Socket with id ${socket.id} just connected`);
+    socket.on("disconnect", () => {
+        console.log(`Socket with id ${socket.id} just disconnected`);
+    });
 });

@@ -35,5 +35,13 @@ export default function reducer(state = {}, action) {
             )
         };
     }
+    // ########################### SOCKET.IO ########################### //
+
+    if (action.type == "LAST_MESSAGES") {
+        return { ...state, chatMessages: action.data };
+    }
+    if (action.type == "NEW_MESSAGE") {
+        return { ...state, chatMessage: action.data };
+    }
     return state;
 }

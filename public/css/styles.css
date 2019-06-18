@@ -80,8 +80,8 @@ h5 {
 .nav {
     font-family: "Montserrat";
     color: black;
-    font-size: 18px;
-    margin-top: 2rem;
+    font-size: 15px;
+    margin-top: 3rem;
 }
 
 .profilepic {
@@ -250,11 +250,6 @@ a {
     position: relative;
     overflow: hidden;
     display: inline-block;
-}
-.uploadbtn:hover {
-    background-color: lightgrey;
-    border: 2px solid lightgrey;
-    color: white;
 }
 .modalpic {
     height: 25vh;

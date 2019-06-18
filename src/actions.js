@@ -67,3 +67,19 @@ export function reject(friendId) {
         })
         .catch(err => console.log(err));
 }
+
+// ###################### SOCKET. IO ######################### //
+
+export async function chatMessages(msgs) {
+    return {
+        type: "LAST_MESSAGES",
+        data: msgs
+    };
+}
+
+export async function chatMessage(msg) {
+    return {
+        type: "NEW_MESSAGE",
+        data: msg
+    };
+}

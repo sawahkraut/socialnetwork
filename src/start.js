@@ -5,6 +5,12 @@ import { App } from "./app";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 
+// ########################### socket io ########################### //
+
+import { init as initSocket } from "./socket";
+
+// #####################################################################
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../public/css/normalize.css";
 import "../public/css/background.css";
@@ -23,6 +29,7 @@ let elem;
 if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
+    initSocket(store);
     elem = (
         <Provider store={store}>
             <App />
