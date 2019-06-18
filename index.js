@@ -97,7 +97,7 @@ app.get("/user", function(req, res) {
     db.userInfo(req.session.userId)
         .then(results => {
             // console.log("feathers typing", results);
-            const avatar = results.rows[0].avatar || "/img/panda3.svg";
+            const avatar = results.rows[0].avatar || "/img/pig.jpg";
             res.json({
                 id: req.session.userId,
                 first: results.rows[0].first,
@@ -347,4 +347,10 @@ io.on("connection", socket => {
     socket.on("disconnect", () => {
         console.log(`Socket with id ${socket.id} just disconnected`);
     });
+    db.getMessages()
+        .then(results => {
+            console.log("chat results", results.rows);
+            socket.emit("chatMessages", results.rows);
+        })
+        .catch(err => console.log(err));
 });

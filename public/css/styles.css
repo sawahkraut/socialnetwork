@@ -209,6 +209,10 @@ a {
 .fa-dragon {
     margin-top: 2rem;
 }
+.fa-sign-out-alt {
+    margin-top: 3rem;
+}
+
 .friendlistAccepted {
     display: flex;
     margin-top: 4rem;
@@ -234,8 +238,8 @@ a {
 }
 .yourname {
     color: #f88757;
-    font-size: 18px;
-    font-weight: bolder;
+    font-size: 16px;
+    margin-right: 10rem;
 }
 .unfriendbtn {
     margin: 1rem;
@@ -277,4 +281,14 @@ a {
     left: 0;
     top: 0;
     opacity: 0;
+}
+
+/* Messenger */
+
+.chat {
+    margin-left: 6rem;
+    margin-top: 2rem;
+}
+.fontfortitle {
+    font-family: "Inconsolata";
 }

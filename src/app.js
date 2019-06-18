@@ -8,16 +8,23 @@ import { OtherProfile } from "./otherprofile";
 import { FindUsers } from "./findusers";
 import { Link } from "react-router-dom";
 import Friends from "./friends";
+import Chat from "./chat";
+import { Tooltip } from "reactstrap";
 
 export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            tooltipOpen: false
         };
         this.updatePic = this.updatePic.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
         this.setBio = this.setBio.bind(this);
+        this.toggle = this.toggle.bind(this);
+    }
+    toggle() {
+        this.setState({ tooltipOpen: !this.state.tooltipOpen });
     }
     setBio(bio) {
         this.setState({
@@ -60,26 +67,39 @@ export class App extends React.Component {
                             <header className="header">
                                 <i className="fas fa-dragon fa-2x" />
                                 <p className="nav">
-                                    Kon'nichiwa, &nbsp;&nbsp;{" "}
+                                    {"Kon'nichiwa,"} &nbsp;{" "}
                                     <div className="yourname">
                                         {this.state.first}
                                     </div>
                                     &nbsp;&nbsp;
                                 </p>
                                 <React.Fragment />
-
-                                <Link to="/" className="nav">
-                                    Your Profile
-                                </Link>
-                                <Link to="/friends" className="nav">
-                                    Your Tomodachi
+                                <Link to="/chat" className="nav">
+                                    Chat
                                 </Link>
                                 <Link to="/users" className="nav">
                                     Search Tomodachi
                                 </Link>
-                                <a href="/logoutUser" className="nav">
-                                    Logout
-                                </a>
+                                <Link to="/friends" className="nav">
+                                    Your Tomodachi
+                                </Link>
+                                <Link to="/" className="nav">
+                                    Profile
+                                </Link>
+                                <div>
+                                    <Tooltip
+                                        placement="right"
+                                        isOpen={this.state.tooltipOpen}
+                                        target="logout"
+                                        toggle={this.toggle}
+                                    >
+                                        Logout
+                                    </Tooltip>
+                                    <a href="/logoutUser" id="logout">
+                                        <i className="fas fa-sign-out-alt fa-1.5x" />
+                                    </a>
+                                </div>
+
                                 <ProfilePic
                                     className={"navpic"}
                                     imgUrl={this.state.avatar}
@@ -128,6 +148,7 @@ export class App extends React.Component {
                                     render={() => <FindUsers />}
                                 />
                                 <Route path="/friends" component={Friends} />
+                                <Route path="/chat" component={Chat} />
                             </div>
                         </React.Fragment>
                     </BrowserRouter>

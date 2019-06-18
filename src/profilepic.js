@@ -5,6 +5,7 @@ export default function profilePic(props) {
     let className = props.className || "profilepic";
     return (
         <img
+            onError={e => (e.target.src = "/img/pig.jpg")}
             className={className}
             src={props.imgUrl}
             alt={props.first}

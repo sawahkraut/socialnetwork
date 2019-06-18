@@ -131,8 +131,11 @@ module.exports.getFriendsList = function getFriendsList(userId) {
 
 module.exports.getMessages = function getMessages() {
     return db.query(
-        ` SELECT * FROM chat
-        ORDER BY id DESC LIMIT 20
+        ` SELECT chat.id AS msg_id, message, users.id AS userId, first, last, avatar, chat.created_at
+          FROM chat
+          JOIN users
+          ON sender_id = users.id
+        ORDER BY msg_id DESC LIMIT 10
         `
     );
 };
