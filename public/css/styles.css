@@ -247,9 +247,7 @@ a {
 .rejectbtn {
     margin-bottom: 2rem;
 }
-.followers {
-    margin: 1rem;
-}
+
 .upload-btn-wrapper {
     position: relative;
     overflow: hidden;
@@ -286,9 +284,72 @@ a {
 /* Messenger */
 
 .chat {
-    margin-left: 6rem;
-    margin-top: 2rem;
+    margin-left: 5rem;
+    margin-top: 1rem;
+    width: 50vw;
+    padding: 1rem;
 }
 .fontfortitle {
     font-family: "Inconsolata";
+}
+.chatScroll {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    overflow: scroll;
+    height: 60vh;
+    margin-bottom: 2rem;
+}
+.chatbox {
+    resize: none;
+    height: 4rem;
+    width: 40vw;
+    margin-left: 2rem;
+    padding: 1rem;
+    border-radius: 20px;
+
+    outline: none;
+}
+.chatWithSend {
+    display: flex;
+    flex-direction: row;
+}
+.chatpic {
+    height: 2rem;
+    width: 2rem;
+    object-fit: cover;
+    border-radius: 50px;
+}
+.chatTimeStamp {
+    margin-left: 6rem;
+    font-family: "Inconsolata";
+    font-style: italic;
+    font-size: 12px;
+}
+.chatMessage {
+    display: flex;
+    border-radius: 20px;
+    padding: 1rem;
+    margin: 0.5rem;
+    font-family: "Montserrat";
+    overflow: auto;
+    font-size: 14px;
+    font-weight: bold;
+}
+.followers {
+    margin: 1rem;
+    background: rgba(248, 135, 87, 0.4);
+}
+.followers:nth-child(odd) {
+    background: #d1f0fd;
+}
+.followers:nth-child(odd) .chatMessage {
+    flex-direction: row-reverse;
+}
+.chatName {
+    font-family: "Inconsolata";
+}
+.paperplane {
+    padding: 0.5rem;
+    cursor: pointer;
 }

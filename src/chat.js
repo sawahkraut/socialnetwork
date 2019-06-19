@@ -5,7 +5,7 @@ import { socket } from "./socket";
 import ProfilePic from "./profilepic";
 import Moment from "react-moment";
 import "moment-timezone";
-import { Button, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -25,12 +25,17 @@ class Chat extends React.Component {
     }
     submit() {
         socket.emit("chatMessage", this.state.chat);
+        this.setState({
+            chat: ""
+        });
     }
 
     componentDidMount() {}
 
     componentDidUpdate() {
-        this.elemRef.current.scrollTop = this.elemRef.current.scrollHeight;
+        if (this.elemRef.current) {
+            this.elemRef.current.scrollTop = this.elemRef.current.scrollHeight;
+        }
     }
 
     render() {
@@ -38,37 +43,59 @@ class Chat extends React.Component {
             <React.Fragment>
                 <div className="chat">
                     <h2 className="fontfortitle">Chat</h2>
-                    <div>
-                        {this.props.chatMessages ? (
-                            this.props.chatMessages.map(chat => (
-                                <div key={chat.msg_id}>
-                                    <div className="followers">
-                                        <Link to={`/user/${chat.user_id}`}>
-                                            <ProfilePic imgUrl={chat.avatar} />
+                    <div className="chatScroll" ref={this.elemRef}>
+                        <Container>
+                            {this.props.chatMessages ? (
+                                this.props.chatMessages.map(chat => (
+                                    <div
+                                        className="followers"
+                                        key={chat.msg_id}
+                                    >
+                                        <Link
+                                            className="chatName"
+                                            to={`/user/${chat.user_id}`}
+                                        >
                                             {chat.first + " " + chat.last}
-
-                                            <Moment format="DD.MM.YYYY HH:mm">
-                                                {chat.created_at}
-                                            </Moment>
                                         </Link>
-                                        <div>{chat.message}</div>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No Users Found</p>
-                        )}
-                    </div>
 
-                    <textarea
-                        name="chat"
-                        id=""
-                        cols="30"
-                        rows="10"
-                        onChange={e => this.handleChange(e)}
-                        onKeyPress={e => this.keyPress(e)}
-                    />
-                    <Button onClick={() => this.submit()}>Send</Button>
+                                        <Moment
+                                            className="chatTimeStamp"
+                                            format="DD.MM.YYYY HH:mm"
+                                        >
+                                            {chat.created_at}
+                                        </Moment>
+
+                                        <div className="chatMessage">
+                                            <ProfilePic
+                                                className="chatpic"
+                                                imgUrl={chat.avatar}
+                                            />
+
+                                            {chat.message}
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No Users Found</p>
+                            )}
+                        </Container>
+                    </div>
+                    <div className="chatWithSend">
+                        <textarea
+                            className="chatbox"
+                            name="chat"
+                            id=""
+                            value={this.state.chat}
+                            onChange={e => this.handleChange(e)}
+                            onKeyPress={e => this.keyPress(e)}
+                        />
+                        <div
+                            className="paperplane"
+                            onClick={() => this.submit()}
+                        >
+                            <i className="far fa-paper-plane fa-2x" />
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
         );
