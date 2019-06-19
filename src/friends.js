@@ -31,7 +31,7 @@ function Friends(props) {
                 {props.friends ? (
                     props.friends.map(friend => (
                         <div key={friend.id}>
-                            <div className="followers">
+                            <div className="friendsFollowers">
                                 <Link to={`/user/${friend.id}`}>
                                     <ProfilePic imgUrl={friend.avatar} />
                                     {friend.first + " " + friend.last}
@@ -60,7 +60,7 @@ function Friends(props) {
                 {props.pending ? (
                     props.pending.map(friend => (
                         <div key={friend.id}>
-                            <div className="followers">
+                            <div className="friendsFollowers">
                                 <Link to={`/user/${friend.id}`}>
                                     <ProfilePic imgUrl={friend.avatar} />
                                     {friend.first + " " + friend.last}

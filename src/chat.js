@@ -18,7 +18,7 @@ class Chat extends React.Component {
             [target.name]: target.value
         });
     }
-    keyPress(event) {
+    keyPressed(event) {
         if (event.key == "enter") {
             this.submit();
         }
@@ -42,13 +42,12 @@ class Chat extends React.Component {
         return (
             <React.Fragment>
                 <div className="chat">
-                    <h2 className="fontfortitle">Chat</h2>
                     <div className="chatScroll" ref={this.elemRef}>
                         <Container>
                             {this.props.chatMessages ? (
                                 this.props.chatMessages.map(chat => (
                                     <div
-                                        className="followers"
+                                        className="followers speech-bubble"
                                         key={chat.msg_id}
                                     >
                                         <Link
@@ -70,8 +69,9 @@ class Chat extends React.Component {
                                                 className="chatpic"
                                                 imgUrl={chat.avatar}
                                             />
-
-                                            {chat.message}
+                                            <p className="chatmsg">
+                                                {chat.message}
+                                            </p>
                                         </div>
                                     </div>
                                 ))
@@ -87,7 +87,7 @@ class Chat extends React.Component {
                             id=""
                             value={this.state.chat}
                             onChange={e => this.handleChange(e)}
-                            onKeyPress={e => this.keyPress(e)}
+                            onKeyPress={e => this.keyPressed(e)}
                         />
                         <div
                             className="paperplane"
