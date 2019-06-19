@@ -131,11 +131,32 @@ module.exports.getFriendsList = function getFriendsList(userId) {
 
 module.exports.getMessages = function getMessages() {
     return db.query(
-        ` SELECT chat.id AS msg_id, message, users.id AS userId, first, last, avatar, chat.created_at
+        ` SELECT chat.id AS msg_id, message, users.id AS user_id, first, last, avatar, chat.created_at
           FROM chat
           JOIN users
           ON sender_id = users.id
         ORDER BY msg_id DESC LIMIT 10
         `
+    );
+};
+
+module.exports.newChat = function newChat(senderId, msg) {
+    return db.query(
+        `INSERT INTO chat (sender_id, message)
+         VALUES($1, $2)
+         RETURNING id`,
+        [senderId, msg]
+    );
+};
+
+module.exports.newChatInfo = function newChatInfo(chatId) {
+    return db.query(
+        `SELECT chat.id AS msg_id, message, users.id AS user_id,
+        first, last, avatar, chat.created_at
+        FROM chat
+        JOIN users
+        ON sender_id = users.id
+        WHERE chat.id = $1`,
+        [chatId]
     );
 };

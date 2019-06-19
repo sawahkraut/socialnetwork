@@ -66,13 +66,13 @@ export class App extends React.Component {
                         <React.Fragment>
                             <header className="header">
                                 <i className="fas fa-dragon fa-2x" />
-                                <p className="nav">
+                                <div className="nav">
                                     {"Kon'nichiwa,"} &nbsp;{" "}
                                     <div className="yourname">
                                         {this.state.first}
                                     </div>
                                     &nbsp;&nbsp;
-                                </p>
+                                </div>
                                 <React.Fragment />
                                 <Link to="/chat" className="nav">
                                     Chat

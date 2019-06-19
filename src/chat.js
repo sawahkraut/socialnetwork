@@ -1,17 +1,37 @@
 import React from "react";
-import * as io from "socket.io-client";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { socket } from "./socket";
 import ProfilePic from "./profilepic";
+import Moment from "react-moment";
+import "moment-timezone";
+import { Button, Container } from "reactstrap";
 
 class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.elemRef = React.createRef();
     }
+    handleChange({ target }) {
+        this.setState({
+            [target.name]: target.value
+        });
+    }
+    keyPress(event) {
+        if (event.key == "enter") {
+            this.submit();
+        }
+    }
+    submit() {
+        socket.emit("chatMessage", this.state.chat);
+    }
+
     componentDidMount() {}
-    componentDidUpdate() {}
+
+    componentDidUpdate() {
+        this.elemRef.current.scrollTop = this.elemRef.current.scrollHeight;
+    }
 
     render() {
         return (
@@ -23,20 +43,32 @@ class Chat extends React.Component {
                             this.props.chatMessages.map(chat => (
                                 <div key={chat.msg_id}>
                                     <div className="followers">
-                                        <Link to={`/user/${chat.userId}`}>
+                                        <Link to={`/user/${chat.user_id}`}>
                                             <ProfilePic imgUrl={chat.avatar} />
                                             {chat.first + " " + chat.last}
+
+                                            <Moment format="DD.MM.YYYY HH:mm">
+                                                {chat.created_at}
+                                            </Moment>
                                         </Link>
+                                        <div>{chat.message}</div>
                                     </div>
-                                    {chat.message}
-                                    {chat.created_at}
                                 </div>
                             ))
                         ) : (
                             <p>No Users Found</p>
                         )}
                     </div>
-                    <textarea name="chat" id="" cols="30" rows="10" />
+
+                    <textarea
+                        name="chat"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        onChange={e => this.handleChange(e)}
+                        onKeyPress={e => this.keyPress(e)}
+                    />
+                    <Button onClick={() => this.submit()}>Send</Button>
                 </div>
             </React.Fragment>
         );
@@ -46,8 +78,7 @@ class Chat extends React.Component {
 const mapStateToProps = function(state) {
     console.log("STATE", state);
     return {
-        chatMessages: state.chatMessages,
-        chatMessage: state.chatMessage
+        chatMessages: state.chatMessages
     };
 };
 

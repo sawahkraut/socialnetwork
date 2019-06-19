@@ -123,7 +123,7 @@ app.get("/otherprofile/:id", function(req, res) {
                 res.json(results.rows[0]);
             })
             .catch(err => {
-                console.log("other profile GET err", err);
+                console.log(err);
             });
     }
 });
@@ -159,13 +159,13 @@ app.get("/logoutUser", function(req, res) {
 app.get("/friends/:id", async (req, res) => {
     const friends = await db.getFriends(req.params.id, req.session.userId);
     if (!friends.rows[0]) {
-        console.log(" send friend request");
+        // console.log(" send friend request");
         res.json({
             friends: false,
             friendsButton: "Send Friend Request"
         });
     } else if (friends.rows[0].accepted == true) {
-        console.log("end friend ship");
+        // console.log("end friend ship");
         res.json({
             friends: true,
             friendsButton: "End Friendship"
@@ -174,7 +174,8 @@ app.get("/friends/:id", async (req, res) => {
         friends.rows[0].accepted == false &&
         friends.rows[0].sender_id == req.session.userId
     ) {
-        console.log("cancel friend ship");
+        // console.log("cancel friend ship");
+
         res.json({
             friends: "cancel",
             friendsButton: "Cancel Friend Request"
@@ -183,7 +184,7 @@ app.get("/friends/:id", async (req, res) => {
         friends.rows[0].accepted == false &&
         friends.rows[0].receiver_id == req.session.userId
     ) {
-        console.log("accept friend request");
+        // console.log("accept friend request");
         res.json({
             friends: "pending",
             friendsButton: "Accept Friend Request "
@@ -285,7 +286,7 @@ app.post("/editbio", function(req, res) {
                 res.json(results.rows[0].bio);
             })
             .catch(err => {
-                console.log("editbio post err", err);
+                console.log(err);
             });
     } else {
         res.json({
@@ -320,28 +321,8 @@ server.listen(8080, function() {
 
 // ######################## SOCKET IO ######################## //
 
-// io.on("connection", function(socket) {
-//     if (!userId) {
-//         return socket.disconnect(true);
-//     }
-//     const userId = socket.request.session.userId;
-// });
-
-// sends to selected server
-// socket.on("welcome", function(data) {
-//     console.log(data);
-//     socket.emit("thanks", {
-//         message: "Thank you. It is great to be here."
-//     });
-// });
-// sends to everyone globally
-// io.emit("globalMessage", {
-//     message: "yo"
-// });
-// object representing all sockets connected
-// io.sockets.emit("globalMessage");
-
 // socket - object that represents a server connection
+
 io.on("connection", socket => {
     console.log(`Socket with id ${socket.id} just connected`);
     socket.on("disconnect", () => {
@@ -349,8 +330,23 @@ io.on("connection", socket => {
     });
     db.getMessages()
         .then(results => {
-            console.log("chat results", results.rows);
-            socket.emit("chatMessages", results.rows);
+            // console.log("chat results", results.rows);
+            socket.emit("chatMessages", results.rows.reverse());
         })
         .catch(err => console.log(err));
+
+    socket.on("chatMessage", async msg => {
+        console.log(msg);
+        try {
+            const newChat = await db.newChat(
+                socket.request.session.userId,
+                msg
+            );
+            const newChatInfo = await db.newChatInfo(newChat.rows[0].id);
+            // console.log("new chat info", newChatInfo.rows[0]);
+            io.sockets.emit("chatMessage", newChatInfo.rows[0]);
+        } catch (e) {
+            console.log(e);
+        }
+    });
 });
