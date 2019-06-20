@@ -23,10 +23,20 @@ export class Uploader extends React.Component {
         e.preventDefault();
         const data = new FormData();
         data.append("file", this.state.profilePicture);
+        data.append("imgUrl", this.props.imgUrl);
         axios.post("/upload", data).then(response => {
             console.log("new img", response.data);
             this.props.updatePic(response.data);
         });
+    }
+    delete() {
+        // console.log("axios post props.imgurl", { imgUrl: this.props.imgUrl });
+        axios
+            .post("/delete-account", { imgUrl: this.props.imgUrl })
+            .then(response => {
+                console.log(response);
+                location.replace("/register");
+            });
     }
     render() {
         return (
@@ -55,6 +65,9 @@ export class Uploader extends React.Component {
                         {this.state.error && <p>{this.state.error}</p>}
                     </ModalBody>
                     <ModalFooter>
+                        <Button color="danger" onClick={() => this.delete()}>
+                            Delete Account
+                        </Button>
                         <Button
                             outline
                             color="secondary"

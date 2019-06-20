@@ -160,3 +160,7 @@ module.exports.newChatInfo = function newChatInfo(chatId) {
         [chatId]
     );
 };
+
+module.exports.deleteAccount = function deleteAccount(userId) {
+    return db.query(`DELETE FROM users WHERE id=$1`, [userId]);
+};

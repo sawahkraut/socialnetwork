@@ -265,6 +265,8 @@ app.post("/login", function(req, res) {
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
+    s3.deleteImage(req.body.imgUrl);
+    console.log("DELTED IMG URL", req.body.imgUrl);
     const link =
         `https://s3.amazonaws.com/salt-sawahkraut/` + req.file.filename;
     db.pushImg(req.session.userId, link)
@@ -301,6 +303,23 @@ app.get("/get-friends-list", async (req, res) => {
     const friendList = await db.getFriendsList(req.session.userId);
     // console.log("friendList.rows", friendList.rows);
     res.json({ friends: friendList.rows });
+});
+
+// ######################### delete account ############################### //
+
+app.post("/delete-account", async (req, res) => {
+    // console.log("/delete-account", req.body.imgUrl);
+    try {
+        // console.log("DELETE ACCOUNT USER_ID", req.session.userId);
+        s3.deleteImage(req.body.imgUrl);
+        await db.deleteAccount(req.session.userId);
+        req.session = null;
+        res.json({
+            success: true
+        });
+    } catch (err) {
+        console.log("delete-account error", err);
+    }
 });
 
 // ########################################################################## //
