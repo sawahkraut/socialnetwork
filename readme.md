@@ -9,8 +9,6 @@ This project was built solely for educational purposes. The idea behind it was t
 
 Technologies/packages used: socket.io, redux, postgres, express, node, AWS, react.
 
-```
-
 ### Screenshots of the project
 
 ![Screenshot](/screenshots/screenshot1.png?raw=true "Screenshot 1")
@@ -18,4 +16,3 @@ Technologies/packages used: socket.io, redux, postgres, express, node, AWS, reac
 ![Screenshot](/screenshots/screenshot2.png?raw=true "Screenshot 2")
 
 ![Screenshot](/screenshots/screenshot3.png?raw=true "Screenshot 3")
-```
