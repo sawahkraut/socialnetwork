@@ -1,6 +1,6 @@
 # Socialnetwork
 
-Spiced Academy: Social Network Project
+SPICED Academy: Social Network Project
 
 I built a socialnetwork to study React, Socket.io and Redux.
 This socialnetwork includes the following features: bio editor, profile picture upload, a chatroom, user search, a friend request/cancel/accept/pending button, and a delete profile option.
