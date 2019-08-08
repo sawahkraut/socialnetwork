@@ -16,3 +16,5 @@ Technologies/packages used: socket.io, redux, postgres, express, node, AWS, reac
 ![Screenshot](/screenshots/screenshot2.png?raw=true "Screenshot 2")
 
 ![Screenshot](/screenshots/screenshot3.png?raw=true "Screenshot 3")
+
+![Screenshot](/screenshots/screenshot4.png?raw=true "Screenshot 4")
